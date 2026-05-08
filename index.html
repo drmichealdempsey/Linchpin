@@ -3,100 +3,190 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Linchpin Services | Ethical Penetration Testing</title>
+  <title>Linchpin Services | Advanced Cybersecurity & Digital Intelligence</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; }
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
     .hero-bg {
-      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), 
-                  url('https://picsum.photos/id/1015/2000/1200');
-      background-size: cover;
-      background-position: center;
+      background: linear-gradient(135deg, #0a0f1c 0%, #1a2338 100%);
+    }
+    .glow-emerald {
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+    }
+    .service-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .service-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 50px -12px rgb(16 185 129 / 0.25);
     }
   </style>
 </head>
-<body class="bg-black text-white">
+<body class="bg-black text-white overflow-x-hidden">
 
   <!-- Navbar -->
-  <nav class="bg-black/95 backdrop-blur-md border-b border-zinc-800 fixed w-full z-50">
+  <nav class="bg-black/90 backdrop-blur-md border-b border-white/10 fixed w-full z-50">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <div class="w-9 h-9 bg-emerald-500 rounded-2xl flex items-center justify-center font-bold text-3xl">L</div>
-        <div>
-          <span class="text-2xl font-bold tracking-tight">Linchpin</span>
-          <span class="text-emerald-400 text-xs block -mt-1">SERVICES</span>
-        </div>
+        <div class="w-10 h-10 bg-emerald-500 rounded-2xl flex items-center justify-center text-3xl font-bold">L</div>
+        <div class="text-2xl font-bold tracking-tight">Linchpin</div>
       </div>
       
-      <div class="flex items-center gap-8 text-sm font-medium">
+      <div class="flex items-center gap-8">
         <a href="#" class="hover:text-emerald-400 transition">Home</a>
-        <a href="#services" class="hover:text-emerald-400 transition">Services</a>
+        <a href="#solutions" class="hover:text-emerald-400 transition">Solutions</a>
       </div>
-      
-      <a href="https://t.me/linchpin_support" target="_blank"
-         class="bg-emerald-600 hover:bg-emerald-500 px-6 py-3 rounded-2xl font-semibold flex items-center gap-2 transition">
-        <i class="fa-brands fa-telegram"></i>
-        Contact on Telegram
-      </a>
+
+      <div class="flex items-center gap-4">
+        <a href="https://t.me/linchpin_support" target="_blank"
+           class="bg-emerald-600 hover:bg-emerald-500 px-6 py-3 rounded-2xl font-semibold flex items-center gap-2 transition">
+          <i class="fa-brands fa-telegram"></i>
+          Telegram
+        </a>
+      </div>
     </div>
   </nav>
 
   <!-- Hero -->
-  <section class="hero-bg min-h-screen flex items-center pt-20">
+  <section class="hero-bg min-h-screen flex items-center pt-20 relative">
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div>
+      <div class="space-y-8">
         <h1 class="text-6xl md:text-7xl font-bold leading-tight tracking-tighter">
-          Secure Your Systems.<br>
-          <span class="text-emerald-400">Before They Do.</span>
+          Advanced Cybersecurity<br>&amp; Digital Intelligence
         </h1>
-        <p class="mt-6 text-xl text-zinc-300 max-w-lg">
-          Professional ethical penetration testing and red team operations.
+        <p class="text-xl text-zinc-300 max-w-lg">
+          Helping businesses and individuals protect digital assets, investigate fraud, and strengthen online security.
         </p>
 
-        <div class="mt-10 flex flex-wrap gap-4">
-          <a href="#services" class="bg-white text-black px-8 py-4 rounded-2xl font-semibold flex items-center gap-3 hover:scale-105 transition">
-            Explore Our Services →
+        <div class="flex flex-wrap gap-4">
+          <a href="https://t.me/linchpin_support" target="_blank"
+             class="bg-emerald-600 hover:bg-emerald-500 px-8 py-4 rounded-2xl font-semibold flex items-center gap-3 transition glow-emerald">
+            <i class="fa-brands fa-telegram"></i>
+            Contact on Telegram
           </a>
-          <a href="https://t.me/linchpin_support" target="_blank" class="border border-emerald-500 hover:bg-emerald-500 hover:text-black px-8 py-4 rounded-2xl font-semibold flex items-center gap-3 transition">
-            <i class="fa-brands fa-telegram"></i> Talk on Telegram
-          </a>
+          
+          <button onclick="alert('Live Chat - Please use Telegram for fastest response')"
+                  class="glass px-8 py-4 rounded-2xl font-semibold flex items-center gap-3 hover:bg-white/10 transition">
+            💬 Live Chat
+          </button>
+        </div>
+
+        <div class="flex gap-8 text-sm">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-emerald-400"></i>
+            <span>Authorized Operations Only</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-lock text-emerald-400"></i>
+            <span>Strict Confidentiality</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services -->
-  <section id="services" class="py-24 bg-zinc-950">
+  <!-- Solutions -->
+  <section id="solutions" class="py-24 bg-zinc-950">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-16">
-        <h2 class="text-5xl font-bold">Our Services</h2>
-        <p class="text-emerald-400 mt-3">All testing is legal and fully authorized</p>
+        <h2 class="text-5xl font-bold mb-4">Our Solutions</h2>
+        <p class="text-emerald-400 text-lg">Ethical • Authorized • Professional</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div onclick="window.location.href='https://t.me/linchpin_support'" class="cursor-pointer bg-zinc-900 border border-zinc-800 hover:border-emerald-500 rounded-3xl p-8 transition-all">
-          <h3 class="text-2xl font-semibold mb-2">Network Penetration</h3>
-          <p class="text-zinc-400">Internal & External infrastructure testing</p>
+        <!-- Service Cards -->
+        <div class="service-card glass rounded-3xl p-8 cursor-pointer" onclick="window.location.href='https://t.me/linchpin_support'">
+          <div class="text-emerald-400 text-4xl mb-6"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3 class="text-2xl font-semibold mb-3">Penetration Testing</h3>
+          <p class="text-zinc-400">Authorized ethical hacking and vulnerability assessments.</p>
         </div>
-        <div onclick="window.location.href='https://t.me/linchpin_support'" class="cursor-pointer bg-zinc-900 border border-zinc-800 hover:border-emerald-500 rounded-3xl p-8 transition-all">
-          <h3 class="text-2xl font-semibold mb-2">Mobile Application Penetration</h3>
-          <p class="text-zinc-400">iOS & Android app security testing</p>
+
+        <div class="service-card glass rounded-3xl p-8 cursor-pointer" onclick="window.location.href='https://t.me/linchpin_support'">
+          <div class="text-emerald-400 text-4xl mb-6"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h3 class="text-2xl font-semibold mb-3">OSINT &amp; Digital Investigation</h3>
+          <p class="text-zinc-400">Open source intelligence and digital footprint analysis.</p>
         </div>
-        <div onclick="window.location.href='https://t.me/linchpin_support'" class="cursor-pointer bg-zinc-900 border border-zinc-800 hover:border-emerald-500 rounded-3xl p-8 transition-all">
-          <h3 class="text-2xl font-semibold mb-2">Red Team Operations</h3>
-          <p class="text-zinc-400">Realistic attack simulation</p>
+
+        <div class="service-card glass rounded-3xl p-8 cursor-pointer" onclick="window.location.href='https://t.me/linchpin_support'">
+          <div class="text-emerald-400 text-4xl mb-6"><i class="fa-solid fa-user-secret"></i></div>
+          <h3 class="text-2xl font-semibold mb-3">Fraud &amp; Scam Investigation</h3>
+          <p class="text-zinc-400">Support in investigating online fraud and scams.</p>
+        </div>
+
+        <div class="service-card glass rounded-3xl p-8 cursor-pointer" onclick="window.location.href='https://t.me/linchpin_support'">
+          <div class="text-emerald-400 text-4xl mb-6"><i class="fa-solid fa-network-wired"></i></div>
+          <h3 class="text-2xl font-semibold mb-3">Cybersecurity Consulting</h3>
+          <p class="text-zinc-400">Enterprise-grade security strategy and risk assessment.</p>
+        </div>
+
+        <div class="service-card glass rounded-3xl p-8 cursor-pointer" onclick="window.location.href='https://t.me/linchpin_support'">
+          <div class="text-emerald-400 text-4xl mb-6"><i class="fa-solid fa-mobile-screen"></i></div>
+          <h3 class="text-2xl font-semibold mb-3">Digital Risk Assessment</h3>
+          <p class="text-zinc-400">Comprehensive evaluation of your online exposure.</p>
+        </div>
+
+        <div class="service-card glass rounded-3xl p-8 cursor-pointer" onclick="window.location.href='https://t.me/linchpin_support'">
+          <div class="text-emerald-400 text-4xl mb-6"><i class="fa-solid fa-headset"></i></div>
+          <h3 class="text-2xl font-semibold mb-3">Incident Response</h3>
+          <p class="text-zinc-400">Rapid response and recovery from security incidents.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Live Chat Button -->
-  <button onclick="alert('Live Chat - Use Telegram for fastest response')" 
-          class="fixed bottom-8 right-8 bg-emerald-600 hover:bg-emerald-500 px-6 py-4 rounded-3xl flex items-center gap-3 shadow-2xl z-50">
+  <!-- Trust Section -->
+  <section class="py-20 bg-black border-t border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h3 class="text-3xl font-semibold mb-10">Trusted Standards</h3>
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="glass rounded-3xl p-8">
+          <i class="fa-solid fa-lock text-4xl text-emerald-400 mb-4"></i>
+          <p class="font-semibold">Strict Confidentiality</p>
+        </div>
+        <div class="glass rounded-3xl p-8">
+          <i class="fa-solid fa-file-shield text-4xl text-emerald-400 mb-4"></i>
+          <p class="font-semibold">Authorized Operations Only</p>
+        </div>
+        <div class="glass rounded-3xl p-8">
+          <i class="fa-solid fa-scale-balanced text-4xl text-emerald-400 mb-4"></i>
+          <p class="font-semibold">Ethical Practices</p>
+        </div>
+        <div class="glass rounded-3xl p-8">
+          <i class="fa-solid fa-user-shield text-4xl text-emerald-400 mb-4"></i>
+          <p class="font-semibold">Privacy Focused</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Live Chat -->
+  <button onclick="alert('Live Chat - Use Telegram for fastest response: @linchpin_support')" 
+          class="fixed bottom-8 right-8 bg-emerald-600 hover:bg-emerald-500 px-7 py-4 rounded-3xl flex items-center gap-3 shadow-2xl z-50 transition-all hover:scale-105">
     <span class="text-3xl">💬</span>
     <span class="font-semibold">Live Chat</span>
   </button>
+
+  <!-- Footer -->
+  <footer class="bg-zinc-950 py-16 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 text-center text-zinc-400">
+      <div class="flex justify-center gap-8 mb-8 text-2xl">
+        <a href="https://t.me/linchpin_support" target="_blank" class="hover:text-emerald-400"><i class="fa-brands fa-telegram"></i></a>
+      </div>
+      <p class="mb-4">© 2026 Linchpin Services. All Rights Reserved.</p>
+      <p class="text-sm">Ethical Cybersecurity • Authorized Security Operations Only</p>
+      <div class="mt-6 text-xs flex justify-center gap-6">
+        <a href="#" class="hover:text-white">Privacy Policy</a>
+        <a href="#" class="hover:text-white">Terms of Service</a>
+        <a href="#" class="hover:text-white">Ethical Disclaimer</a>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linchpin Services | Ethical Penetration Testing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .hero-bg {
+      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), 
+                  url('https://picsum.photos/id/1015/2000/1200');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+<body class="bg-black text-white">
+
+  <!-- Navbar -->
+  <nav class="bg-black/95 backdrop-blur-md border-b border-zinc-800 fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-emerald-500 rounded-2xl flex items-center justify-center font-bold text-3xl">L</div>
+        <div>
+          <span class="text-2xl font-bold tracking-tight">Linchpin</span>
+          <span class="text-emerald-400 text-xs block -mt-1">SERVICES</span>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-8 text-sm font-medium">
+        <a href="#" class="hover:text-emerald-400 transition">Home</a>
+        <a href="#services" class="hover:text-emerald-400 transition">Services</a>
+      </div>
+      
+      <a href="https://t.me/linchpin_support" target="_blank"
+         class="bg-emerald-600 hover:bg-emerald-500 px-6 py-3 rounded-2xl font-semibold flex items-center gap-2 transition">
+        <i class="fa-brands fa-telegram"></i>
+        Contact on Telegram
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-bg min-h-screen flex items-center pt-20">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-6xl md:text-7xl font-bold leading-tight tracking-tighter">
+          Secure Your Systems.<br>
+          <span class="text-emerald-400">Before They Do.</span>
+        </h1>
+        <p class="mt-6 text-xl text-zinc-300 max-w-lg">
+          Professional ethical penetration testing and red team operations.
+        </p>
+
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href="#services" class="bg-white text-black px-8 py-4 rounded-2xl font-semibold flex items-center gap-3 hover:scale-105 transition">
+            Explore Our Services →
+          </a>
+          <a href="https://t.me/linchpin_support" target="_blank" class="border border-emerald-500 hover:bg-emerald-500 hover:text-black px-8 py-4 rounded-2xl font-semibold flex items-center gap-3 transition">
+            <i class="fa-brands fa-telegram"></i> Talk on Telegram
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-24 bg-zinc-950">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-bold">Our Services</h2>
+        <p class="text-emerald-400 mt-3">All testing is legal and fully authorized</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div onclick="window.location.href='https://t.me/linchpin_support'" class="cursor-pointer bg-zinc-900 border border-zinc-800 hover:border-emerald-500 rounded-3xl p-8 transition-all">
+          <h3 class="text-2xl font-semibold mb-2">Network Penetration</h3>
+          <p class="text-zinc-400">Internal & External infrastructure testing</p>
+        </div>
+        <div onclick="window.location.href='https://t.me/linchpin_support'" class="cursor-pointer bg-zinc-900 border border-zinc-800 hover:border-emerald-500 rounded-3xl p-8 transition-all">
+          <h3 class="text-2xl font-semibold mb-2">Mobile Application Penetration</h3>
+          <p class="text-zinc-400">iOS & Android app security testing</p>
+        </div>
+        <div onclick="window.location.href='https://t.me/linchpin_support'" class="cursor-pointer bg-zinc-900 border border-zinc-800 hover:border-emerald-500 rounded-3xl p-8 transition-all">
+          <h3 class="text-2xl font-semibold mb-2">Red Team Operations</h3>
+          <p class="text-zinc-400">Realistic attack simulation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Chat Button -->
+  <button onclick="alert('Live Chat - Use Telegram for fastest response')" 
+          class="fixed bottom-8 right-8 bg-emerald-600 hover:bg-emerald-500 px-6 py-4 rounded-3xl flex items-center gap-3 shadow-2xl z-50">
+    <span class="text-3xl">💬</span>
+    <span class="font-semibold">Live Chat</span>
+  </button>
+
+</body>
+</html>

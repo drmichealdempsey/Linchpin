@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    body { font-family: 'Inter', system-ui, sans-serif; }
+    body { font-family: 'Inter', system-ui, sans-serif; scroll-behavior: smooth; }
     .glass {
       background: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(16px);
@@ -17,7 +17,8 @@
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .service-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.1);
     }
     .dropdown {
       max-height: 0;
@@ -25,13 +26,12 @@
       transition: max-height 0.5s ease;
     }
     .expanded .dropdown {
-      max-height: 400px;
+      max-height: 600px;
     }
   </style>
 </head>
 <body class="bg-black text-white">
 
-  <!-- Navbar -->
   <nav class="bg-black/95 backdrop-blur-md border-b border-white/10 fixed w-full z-50">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
       <div class="flex items-center gap-3">
@@ -42,24 +42,24 @@
       <div class="hidden md:flex items-center gap-8 text-sm font-medium">
         <a href="#" class="hover:text-emerald-400 transition">Home</a>
         <a href="#solutions" class="hover:text-emerald-400 transition">Solutions</a>
+        <a href="#how-it-works" class="hover:text-emerald-400 transition">How It Works</a>
       </div>
 
       <a href="https://t.me/linchpin_support" target="_blank"
-         class="bg-emerald-600 hover:bg-emerald-500 px-5 py-3 rounded-2xl font-semibold flex items-center gap-2 text-sm md:text-base">
+         class="bg-emerald-600 hover:bg-emerald-500 px-5 py-3 rounded-2xl font-semibold flex items-center gap-2 text-sm md:text-base transition">
         <i class="fa-brands fa-telegram"></i>
         <span class="hidden sm:inline">Telegram</span>
       </a>
     </div>
   </nav>
 
-  <!-- Hero -->
   <section class="min-h-screen bg-gradient-to-br from-zinc-950 to-black flex items-center pt-20">
     <div class="max-w-7xl mx-auto px-6 text-center">
       <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tighter">
-        Advanced Cybersecurity<br>&amp; Digital Intelligence
+        We help solve problems <br>&amp; Others can't 
       </h1>
       <p class="mt-6 text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto">
-        Helping businesses and individuals protect digital assets, investigate fraud, and strengthen online security.
+        Solving Difficult Confidential Problems with Technology, Intelligence, and Ethical Hacking Experience.
       </p>
       
       <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
@@ -69,14 +69,13 @@
           Contact on Telegram
         </a>
         <button onclick="alert('Live Chat - Please contact us via Telegram for fastest response')"
-                class="glass px-8 py-4 rounded-2xl font-semibold flex items-center justify-center gap-3 hover:bg-white/10 transition">
+                class="glass px-8 py-4 rounded-2xl font-semibold flex items-center justify-center gap-3 hover:bg-white/10 transition text-white">
           💬 Live Chat
         </button>
       </div>
     </div>
   </section>
 
-  <!-- Solutions Section -->
   <section id="solutions" class="py-20 md:py-24 bg-zinc-950">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-12">
@@ -86,7 +85,6 @@
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="services-container">
         
-        <!-- Card 1 -->
         <div class="service-card glass rounded-3xl p-6 md:p-8 cursor-pointer" onclick="toggleDropdown(this)">
           <div class="flex justify-between items-start">
             <div class="flex-1">
@@ -101,10 +99,10 @@
             <div>• Network & Infrastructure Testing</div>
             <div>• API & Mobile App Security</div>
             <div>• Red Team Operations</div>
+            <div>• Mobile Penetration Testing</div>
           </div>
         </div>
 
-        <!-- Card 2 -->
         <div class="service-card glass rounded-3xl p-6 md:p-8 cursor-pointer" onclick="toggleDropdown(this)">
           <div class="flex justify-between items-start">
             <div class="flex-1">
@@ -119,10 +117,12 @@
             <div>• Social Media Intelligence</div>
             <div>• Background Checks</div>
             <div>• Threat Intelligence</div>
+            <div>• Private Investigator Here</div>
+            <div>• Second Identity</div>
+            <div>• Admin Authorization</div>
           </div>
         </div>
 
-        <!-- Card 3 -->
         <div class="service-card glass rounded-3xl p-6 md:p-8 cursor-pointer" onclick="toggleDropdown(this)">
           <div class="flex justify-between items-start">
             <div class="flex-1">
@@ -136,15 +136,156 @@
             <div>• Romance & Investment Scam Tracing</div>
             <div>• Impersonation Cases</div>
             <div>• Financial Fraud Investigation</div>
+            <div>• Live Location Tracking</div>
           </div>
         </div>
 
-        <!-- You can add more cards if needed -->
+        <div class="service-card glass rounded-3xl p-6 md:p-8 cursor-pointer lg:col-span-3" onclick="toggleDropdown(this)">
+          <div class="flex justify-between items-start">
+            <div class="flex-1">
+              <div class="text-emerald-400 text-4xl mb-4"><i class="fa-solid fa-ellipsis"></i></div>
+              <h3 class="text-xl md:text-2xl font-semibold">Others</h3>
+              <p class="text-zinc-400 mt-2 text-sm md:text-base">Specialized digital and investigative services worldwide.</p>
+            </div>
+            <i class="fa-solid fa-chevron-down text-emerald-400 mt-2 transition-transform"></i>
+          </div>
+          <div class="dropdown mt-6 grid md:grid-cols-2 gap-4 text-sm text-zinc-300 pl-2 border-l border-emerald-500/30">
+            <div class="space-y-3">
+              <div>• Cybersecurity assessments and ethical hacking</div>
+              <div>• Digital forensics and evidence recovery</div>
+              <div>• Account security and breach investigations</div>
+              <div>• Scam and fraud analysis</div>
+            </div>
+            <div class="space-y-3">
+              <div>• Online reputation support</div>
+              <div>• Technical troubleshooting and consultation</div>
+              <div>• Data recovery and device analysis</div>
+              <div>• Business security advisory</div>
+              <div class="text-emerald-400 font-semibold pt-2">* Need Help With Something Not Listed Above? We’re Ready to Assist</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Floating Live Chat -->
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-6 text-center border-y border-white/5 py-16">
+      <h2 class="text-3xl font-bold mb-4">Trust Statement</h2>
+      <p class="text-emerald-400 text-xl font-medium tracking-wide mb-6">Discreet. Professional. Results-Driven.</p>
+      <p class="text-zinc-400 text-lg leading-relaxed">
+        Your privacy is our priority. Every case is handled with strict confidentiality and a commitment to ethical, legal, and effective solutions.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-8 mt-16 text-left">
+        <div class="glass p-8 rounded-3xl">
+          <h4 class="text-emerald-400 font-bold mb-4">Proven Expertise</h4>
+          <p class="text-sm text-zinc-400">Years of hands-on experience in ethical hacking, cybersecurity, and digital investigations.</p>
+        </div>
+        <div class="glass p-8 rounded-3xl">
+          <h4 class="text-emerald-400 font-bold mb-4">Global Reach</h4>
+          <p class="text-sm text-zinc-400">We work with clients from anywhere in the world.</p>
+        </div>
+        <div class="glass p-8 rounded-3xl">
+          <h4 class="text-emerald-400 font-bold mb-4">Complete Confidentiality</h4>
+          <p class="text-sm text-zinc-400">Your information and case details remain private and secure.</p>
+        </div>
+        <div class="glass p-8 rounded-3xl">
+          <h4 class="text-emerald-400 font-bold mb-4">Tailored Solutions</h4>
+          <p class="text-sm text-zinc-400">Every challenge is unique, and so is our approach.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works" class="py-20 bg-zinc-950">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-16">How It Works</h2>
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 font-bold">1</div>
+          <h4 class="font-bold mb-2">Contact Us</h4>
+          <p class="text-sm text-zinc-400">Reach out through Telegram and briefly describe your challenge.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 font-bold">2</div>
+          <h4 class="font-bold mb-2">Confidential Review</h4>
+          <p class="text-sm text-zinc-400">We assess your situation and determine the best legal and ethical approach.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 font-bold">3</div>
+          <h4 class="font-bold mb-2">Customized Solution</h4>
+          <p class="text-sm text-zinc-400">We provide expert assistance designed to resolve your issue effectively.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 font-bold">4</div>
+          <h4 class="font-bold mb-2">Ongoing Support</h4>
+          <p class="text-sm text-zinc-400">We stay with you until the matter is resolved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-12">Industries We Serve</h2>
+      <div class="flex flex-wrap justify-center gap-4">
+        <span class="glass px-6 py-2 rounded-full text-sm">• Individuals</span>
+        <span class="glass px-6 py-2 rounded-full text-sm">• Small Businesses</span>
+        <span class="glass px-6 py-2 rounded-full text-sm">• Startups</span>
+        <span class="glass px-6 py-2 rounded-full text-sm">• Corporate Organizations</span>
+        <span class="glass px-6 py-2 rounded-full text-sm">• Legal Professionals</span>
+        <span class="glass px-6 py-2 rounded-full text-sm">• Real Estate Companies</span>
+        <span class="glass px-6 py-2 rounded-full text-sm">• Online Entrepreneurs</span>
+        <span class="glass px-6 py-2 rounded-full text-sm">• Students</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-emerald-600 text-center text-white px-6">
+    <h2 class="text-4xl font-bold mb-6">Need Help With a Complex Problem?</h2>
+    <p class="max-w-2xl mx-auto mb-10 text-lg opacity-90">
+      Whether you’re dealing with cybersecurity concerns, technical challenges, or digital investigations, Linchpin Service is here to help. Contact us securely on Telegram and get expert assistance today.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://t.me/linchpin_support" target="_blank" class="bg-black px-8 py-4 rounded-2xl font-bold hover:bg-zinc-900 transition">Chat With Us on Telegram</a>
+        <a href="https://t.me/linchpin_support" target="_blank" class="bg-white text-emerald-600 px-8 py-4 rounded-2xl font-bold hover:bg-zinc-100 transition">Get Confidential Assistance</a>
+    </div>
+  </section>
+
+  <footer class="bg-zinc-950 pt-20 pb-10 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-12 mb-16">
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center font-bold">L</div>
+            <span class="text-xl font-bold">Linchpin Service</span>
+          </div>
+          <p class="text-zinc-400 leading-relaxed text-sm">
+            At Linchpin Service, we provide confidential cybersecurity, digital investigation, and technical support to help individuals and businesses overcome challenging situations that require specialized expertise.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-8">
+            <div class="space-y-4">
+                <h5 class="font-bold">Call-to-Action</h5>
+                <ul class="text-sm text-zinc-500 space-y-2">
+                    <li><a href="https://t.me/linchpin_support" class="hover:text-emerald-400">• Speak to an Expert Now</a></li>
+                    <li><a href="https://t.me/linchpin_support" class="hover:text-emerald-400">• Request Immediate Help</a></li>
+                </ul>
+            </div>
+            <div class="space-y-4 text-right">
+                <p class="text-emerald-500 font-bold">Fast Response</p>
+                <p class="text-xs text-zinc-500">Connect directly through Telegram for immediate assistance.</p>
+            </div>
+        </div>
+      </div>
+      <div class="border-t border-white/5 pt-8 text-center text-zinc-600 text-sm">
+        <p>Linchpin Service — Solving Complex Problems with Technology and Trust.</p>
+      </div>
+    </div>
+  </footer>
+
   <button onclick="alert('Live Chat - Best contacted via Telegram')" 
           class="fixed bottom-6 right-6 bg-emerald-600 hover:bg-emerald-500 px-6 py-4 rounded-3xl flex items-center gap-3 shadow-2xl z-50 transition hover:scale-105">
     <span class="text-3xl">💬</span>

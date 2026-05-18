@@ -76,24 +76,56 @@
   <!-- NAV -->
   <nav class="bg-black/95 backdrop-blur-md border-b border-white/10 fixed w-full z-50">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-      <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home')">
+
+      <!-- Logo -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home'); closeMobileMenu()">
         <div class="w-10 h-10 bg-emerald-500 rounded-2xl flex items-center justify-center text-3xl font-bold">L</div>
         <div class="text-2xl font-bold tracking-tight">Linchpin</div>
       </div>
-      
+
+      <!-- Desktop links -->
       <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="#" onclick="showPage('home')" class="nav-link hover:text-emerald-400 transition" data-page="home">Home</a>
-        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('solutions').scrollIntoView({behavior:'smooth'}),100)" class="nav-link hover:text-emerald-400 transition">Solutions</a>
-        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'}),100)" class="nav-link hover:text-emerald-400 transition">How It Works</a>
-        <a href="#" onclick="showPage('blog')" class="nav-link hover:text-emerald-400 transition" data-page="blog">Blog</a>
-        <a href="#" onclick="showPage('contact')" class="nav-link hover:text-emerald-400 transition" data-page="contact">Contact</a>
+        <a href="#" onclick="showPage('home'); return false;" class="nav-link hover:text-emerald-400 transition" data-page="home">Home</a>
+        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('solutions').scrollIntoView({behavior:'smooth'}),100); return false;" class="nav-link hover:text-emerald-400 transition">Solutions</a>
+        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'}),100); return false;" class="nav-link hover:text-emerald-400 transition">How It Works</a>
+        <a href="#" onclick="showPage('blog'); return false;" class="nav-link hover:text-emerald-400 transition" data-page="blog">Blog</a>
+        <a href="#" onclick="showPage('contact'); return false;" class="nav-link hover:text-emerald-400 transition" data-page="contact">Contact</a>
       </div>
 
-      <a href="https://t.me/linchpin_service" target="_blank"
-         class="bg-emerald-600 hover:bg-emerald-500 px-5 py-3 rounded-2xl font-semibold flex items-center gap-2 text-sm md:text-base transition">
-        <i class="fa-brands fa-telegram"></i>
-        <span class="hidden sm:inline">Telegram</span>
-      </a>
+      <!-- Right: Telegram + Hamburger -->
+      <div class="flex items-center gap-3">
+        <a href="https://t.me/linchpin_service" target="_blank"
+           class="bg-emerald-600 hover:bg-emerald-500 px-5 py-3 rounded-2xl font-semibold flex items-center gap-2 text-sm md:text-base transition">
+          <i class="fa-brands fa-telegram"></i>
+          <span class="hidden sm:inline">Telegram</span>
+        </a>
+        <!-- Hamburger (mobile only) -->
+        <button id="hamburger" onclick="toggleMobileMenu()" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 focus:outline-none" aria-label="Toggle menu">
+          <span class="ham-line block w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="ham-line block w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="ham-line block w-6 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu dropdown -->
+    <div id="mobile-menu" class="md:hidden overflow-hidden transition-all duration-300" style="max-height:0;">
+      <div class="px-6 pb-6 pt-2 flex flex-col gap-1 border-t border-white/10 text-sm font-medium">
+        <a href="#" onclick="showPage('home'); closeMobileMenu(); return false;"
+           class="mob-nav-link nav-link px-4 py-3 rounded-xl hover:bg-white/5 transition" data-page="home">🏠 Home</a>
+        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('solutions').scrollIntoView({behavior:'smooth'}),100); closeMobileMenu(); return false;"
+           class="mob-nav-link px-4 py-3 rounded-xl hover:bg-white/5 transition">🛡️ Solutions</a>
+        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'}),100); closeMobileMenu(); return false;"
+           class="mob-nav-link px-4 py-3 rounded-xl hover:bg-white/5 transition">⚙️ How It Works</a>
+        <a href="#" onclick="showPage('blog'); closeMobileMenu(); return false;"
+           class="mob-nav-link nav-link px-4 py-3 rounded-xl hover:bg-white/5 transition" data-page="blog">📝 Blog</a>
+        <a href="#" onclick="showPage('contact'); closeMobileMenu(); return false;"
+           class="mob-nav-link nav-link px-4 py-3 rounded-xl hover:bg-white/5 transition" data-page="contact">✉️ Contact</a>
+        <a href="https://t.me/linchpin_service" target="_blank"
+           class="mt-2 bg-emerald-600 hover:bg-emerald-500 px-4 py-3 rounded-xl font-semibold flex items-center gap-2 transition">
+          <i class="fa-brands fa-telegram"></i> Open Telegram
+        </a>
+      </div>
     </div>
   </nav>
 
@@ -666,11 +698,39 @@
 
 
   <script>
+    /* ---- Mobile menu ---- */
+    let menuOpen = false;
+    function toggleMobileMenu() {
+      menuOpen = !menuOpen;
+      const menu = document.getElementById('mobile-menu');
+      const lines = document.querySelectorAll('.ham-line');
+      if (menuOpen) {
+        menu.style.maxHeight = menu.scrollHeight + 'px';
+        lines[0].style.transform = 'translateY(8px) rotate(45deg)';
+        lines[1].style.opacity = '0';
+        lines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+      } else {
+        menu.style.maxHeight = '0';
+        lines[0].style.transform = '';
+        lines[1].style.opacity = '1';
+        lines[2].style.transform = '';
+      }
+    }
+    function closeMobileMenu() {
+      if (!menuOpen) return;
+      menuOpen = false;
+      const menu = document.getElementById('mobile-menu');
+      const lines = document.querySelectorAll('.ham-line');
+      menu.style.maxHeight = '0';
+      lines[0].style.transform = '';
+      lines[1].style.opacity = '1';
+      lines[2].style.transform = '';
+    }
+
     /* ---- Page routing ---- */
     function showPage(name) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById('page-' + name).classList.add('active');
-      // Update active nav link
       document.querySelectorAll('.nav-link[data-page]').forEach(a => {
         a.classList.toggle('active', a.dataset.page === name);
       });

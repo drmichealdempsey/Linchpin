@@ -7,89 +7,48 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; scroll-behavior: smooth; }
-    .glass {
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .service-card {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .service-card:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 255, 255, 0.1);
-    }
-    .dropdown {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-    }
-    .expanded .dropdown {
-      max-height: 600px;
-    }
-
-    /* Page routing */
+    .glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); }
+    .service-card { transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+    .service-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.1); }
+    .dropdown { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+    .expanded .dropdown { max-height: 900px; }
     .page { display: none; }
     .page.active { display: block; }
-
-    /* Contact form styles */
-    .form-input {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #fff;
-      transition: border-color 0.3s;
-    }
-    .form-input:focus {
-      outline: none;
-      border-color: #10b981;
-      background: rgba(255,255,255,0.08);
-    }
+    .blog-card { transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+    .blog-card:hover { transform: translateY(-4px); }
+    .form-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color:#fff; transition: border-color 0.3s; }
+    .form-input:focus { outline: none; border-color: #10b981; background: rgba(255,255,255,0.08); }
     .form-input::placeholder { color: rgba(255,255,255,0.3); }
-
-    /* Active nav link */
     .nav-link.active { color: #34d399; }
-
-    /* Toast */
-    #toast {
-      position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px);
-      background: #059669; color: #fff; padding: 14px 28px; border-radius: 16px;
-      font-weight: 600; font-size: 15px; z-index: 999;
-      opacity: 0; transition: all 0.4s; pointer-events: none;
-    }
-    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    #toast { position:fixed; bottom:100px; left:50%; transform:translateX(-50%) translateY(20px); background:#059669; color:#fff; padding:14px 28px; border-radius:16px; font-weight:600; font-size:15px; z-index:999; opacity:0; transition:all 0.4s; pointer-events:none; }
+    #toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+    .skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%); background-size:200% 100%; animation:shimmer 1.5s infinite; border-radius:8px; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
   </style>
 </head>
 <body class="bg-black text-white">
 
-  <!-- Toast -->
-  <div id="toast">✓ Message sent! We'll be in touch within 24 hours.</div>
+  <div id="toast">Message sent! We will be in touch within 24 hours.</div>
 
   <!-- NAV -->
   <nav class="bg-black/95 backdrop-blur-md border-b border-white/10 fixed w-full z-50">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-
-      <!-- Logo -->
       <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home'); closeMobileMenu()">
         <div class="w-10 h-10 bg-emerald-500 rounded-2xl flex items-center justify-center text-3xl font-bold">L</div>
         <div class="text-2xl font-bold tracking-tight">Linchpin</div>
       </div>
-
-      <!-- Desktop links -->
       <div class="hidden md:flex items-center gap-8 text-sm font-medium">
         <a href="#" onclick="showPage('home'); return false;" class="nav-link hover:text-emerald-400 transition" data-page="home">Home</a>
-        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('solutions').scrollIntoView({behavior:'smooth'}),100); return false;" class="nav-link hover:text-emerald-400 transition">Solutions</a>
-        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'}),100); return false;" class="nav-link hover:text-emerald-400 transition">How It Works</a>
+        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('solutions').scrollIntoView({behavior:'smooth'}),100); return false;" class="hover:text-emerald-400 transition">Solutions</a>
+        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'}),100); return false;" class="hover:text-emerald-400 transition">How It Works</a>
+        <a href="#" onclick="showPage('blog'); return false;" class="nav-link hover:text-emerald-400 transition" data-page="blog">Blog</a>
         <a href="#" onclick="showPage('contact'); return false;" class="nav-link hover:text-emerald-400 transition" data-page="contact">Contact</a>
       </div>
-
-      <!-- Right: Telegram + Hamburger -->
       <div class="flex items-center gap-3">
-        <a href="https://t.me/linchpin_service" target="_blank"
-           class="bg-emerald-600 hover:bg-emerald-500 px-5 py-3 rounded-2xl font-semibold flex items-center gap-2 text-sm md:text-base transition">
-          <i class="fa-brands fa-telegram"></i>
-          <span class="hidden sm:inline">Telegram</span>
+        <a href="https://t.me/linchpin_service" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 px-5 py-3 rounded-2xl font-semibold flex items-center gap-2 text-sm md:text-base transition">
+          <i class="fa-brands fa-telegram"></i><span class="hidden sm:inline">Telegram</span>
         </a>
-        <!-- Hamburger (mobile only) -->
         <button id="hamburger" onclick="toggleMobileMenu()" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 focus:outline-none" aria-label="Toggle menu">
           <span class="ham-line block w-6 h-0.5 bg-white transition-all duration-300"></span>
           <span class="ham-line block w-6 h-0.5 bg-white transition-all duration-300"></span>
@@ -97,48 +56,29 @@
         </button>
       </div>
     </div>
-
-    <!-- Mobile menu dropdown -->
     <div id="mobile-menu" class="md:hidden overflow-hidden transition-all duration-300" style="max-height:0;">
       <div class="px-6 pb-6 pt-2 flex flex-col gap-1 border-t border-white/10 text-sm font-medium">
-        <a href="#" onclick="showPage('home'); closeMobileMenu(); return false;"
-           class="mob-nav-link nav-link px-4 py-3 rounded-xl hover:bg-white/5 transition" data-page="home">🏠 Home</a>
-        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('solutions').scrollIntoView({behavior:'smooth'}),100); closeMobileMenu(); return false;"
-           class="mob-nav-link px-4 py-3 rounded-xl hover:bg-white/5 transition">🛡️ Solutions</a>
-        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'}),100); closeMobileMenu(); return false;"
-           class="mob-nav-link px-4 py-3 rounded-xl hover:bg-white/5 transition">⚙️ How It Works</a>
-        <a href="#" onclick="showPage('contact'); closeMobileMenu(); return false;"
-           class="mob-nav-link nav-link px-4 py-3 rounded-xl hover:bg-white/5 transition" data-page="contact">✉️ Contact</a>
-        <a href="https://t.me/linchpin_service" target="_blank"
-           class="mt-2 bg-emerald-600 hover:bg-emerald-500 px-4 py-3 rounded-xl font-semibold flex items-center gap-2 transition">
+        <a href="#" onclick="showPage('home'); closeMobileMenu(); return false;" class="nav-link px-4 py-3 rounded-xl hover:bg-white/5 transition" data-page="home">Home</a>
+        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('solutions').scrollIntoView({behavior:'smooth'}),100); closeMobileMenu(); return false;" class="px-4 py-3 rounded-xl hover:bg-white/5 transition">Solutions</a>
+        <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'}),100); closeMobileMenu(); return false;" class="px-4 py-3 rounded-xl hover:bg-white/5 transition">How It Works</a>
+        <a href="#" onclick="showPage('blog'); closeMobileMenu(); return false;" class="nav-link px-4 py-3 rounded-xl hover:bg-white/5 transition" data-page="blog">Blog</a>
+        <a href="#" onclick="showPage('contact'); closeMobileMenu(); return false;" class="nav-link px-4 py-3 rounded-xl hover:bg-white/5 transition" data-page="contact">Contact</a>
+        <a href="https://t.me/linchpin_service" target="_blank" class="mt-2 bg-emerald-600 hover:bg-emerald-500 px-4 py-3 rounded-xl font-semibold flex items-center gap-2 transition">
           <i class="fa-brands fa-telegram"></i> Open Telegram
         </a>
       </div>
     </div>
   </nav>
 
-  <!-- ==================== HOME PAGE ==================== -->
+  <!-- HOME -->
   <div id="page-home" class="page active">
-
     <section class="min-h-screen bg-gradient-to-br from-zinc-950 to-black flex items-center pt-20">
       <div class="max-w-7xl mx-auto px-6 text-center">
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tighter">
-          We help solve problems <br> Others can't 
-        </h1>
-        <p class="mt-6 text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto">
-          Solving Difficult Confidential Problems with Technology, Intelligence, and Ethical Hacking Experience.
-        </p>
-        
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tighter">We help solve problems <br> Others can't</h1>
+        <p class="mt-6 text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto">Solving Difficult Confidential Problems with Technology, Intelligence, and Ethical Hacking Experience.</p>
         <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="https://t.me/linchpin_service" target="_blank"
-             class="bg-emerald-600 hover:bg-emerald-500 px-8 py-4 rounded-2xl font-semibold flex items-center justify-center gap-3 transition">
-            <i class="fa-brands fa-telegram"></i>
-            Contact on Telegram
-          </a>
-          <button onclick="alert('Live Chat - Please contact us via Telegram for fastest response')"
-                  class="glass px-8 py-4 rounded-2xl font-semibold flex items-center justify-center gap-3 hover:bg-white/10 transition text-white">
-             Live Chat
-          </button>
+          <a href="https://t.me/linchpin_service" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 px-8 py-4 rounded-2xl font-semibold flex items-center justify-center gap-3 transition"><i class="fa-brands fa-telegram"></i> Contact on Telegram</a>
+          <button onclick="alert('Live Chat - Please contact us via Telegram for fastest response')" class="glass px-8 py-4 rounded-2xl font-semibold flex items-center justify-center gap-3 hover:bg-white/10 transition text-white">Live Chat</button>
         </div>
       </div>
     </section>
@@ -147,11 +87,11 @@
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-12">
           <h2 class="text-4xl md:text-5xl font-bold">Our Solutions</h2>
-          <p class="text-emerald-400 mt-3 text-lg">Ethical • Authorized • Professional</p>
+          <p class="text-emerald-400 mt-3 text-lg">Ethical - Authorized - Professional</p>
         </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="services-container">
-          
+          <!-- Penetration Testing -->
           <div class="service-card glass rounded-3xl p-6 md:p-8 cursor-pointer" onclick="toggleDropdown(this)">
             <div class="flex justify-between items-start">
               <div class="flex-1">
@@ -162,52 +102,87 @@
               <i class="fa-solid fa-chevron-down text-emerald-400 mt-2 transition-transform"></i>
             </div>
             <div class="dropdown mt-6 text-sm text-zinc-300 space-y-3 pl-2 border-l border-emerald-500/30">
-              <div>• Web Application Penetration Testing</div>
-              <div>• Network & Infrastructure Testing</div>
-              <div>• API & Mobile App Security</div>
-              <div>• Red Team Operations</div>
-              <div>• Mobile Penetration Testing</div>
+              <div>- Web Application Penetration Testing</div>
+              <div>- Network and Infrastructure Testing</div>
+              <div>- API and Mobile App Security</div>
+              <div>- Red Team Operations</div>
+              <div>- Mobile Penetration Testing</div>
             </div>
           </div>
 
+          <!-- OSINT (Private Investigator Here removed) -->
           <div class="service-card glass rounded-3xl p-6 md:p-8 cursor-pointer" onclick="toggleDropdown(this)">
             <div class="flex justify-between items-start">
               <div class="flex-1">
                 <div class="text-emerald-400 text-4xl mb-4"><i class="fa-solid fa-magnifying-glass"></i></div>
-                <h3 class="text-xl md:text-2xl font-semibold">OSINT & Digital Investigation</h3>
+                <h3 class="text-xl md:text-2xl font-semibold">OSINT &amp; Digital Investigation</h3>
                 <p class="text-zinc-400 mt-2 text-sm md:text-base">Open source intelligence and digital footprint analysis.</p>
               </div>
               <i class="fa-solid fa-chevron-down text-emerald-400 mt-2 transition-transform"></i>
             </div>
             <div class="dropdown mt-6 text-sm text-zinc-300 space-y-3 pl-2 border-l border-emerald-500/30">
-              <div>• Digital Footprint Analysis</div>
-              <div>• Social Media Intelligence</div>
-              <div>• Background Checks</div>
-              <div>• Threat Intelligence</div>
-              <div>• Private Investigator Here</div>
-              <div>• Second Identity</div>
-              <div>• Admin Authorization</div>
+              <div>- Digital Footprint Analysis</div>
+              <div>- Social Media Intelligence</div>
+              <div>- Background Checks</div>
+              <div>- Threat Intelligence</div>
+              <div>- Second Identity</div>
+              <div>- Admin Authorization</div>
             </div>
           </div>
 
+          <!-- Fraud & Scam -->
           <div class="service-card glass rounded-3xl p-6 md:p-8 cursor-pointer" onclick="toggleDropdown(this)">
             <div class="flex justify-between items-start">
               <div class="flex-1">
                 <div class="text-emerald-400 text-4xl mb-4"><i class="fa-solid fa-user-secret"></i></div>
-                <h3 class="text-xl md:text-2xl font-semibold">Fraud & Scam Investigation</h3>
+                <h3 class="text-xl md:text-2xl font-semibold">Fraud &amp; Scam Investigation</h3>
                 <p class="text-zinc-400 mt-2 text-sm md:text-base">Support in investigating online fraud and scams.</p>
               </div>
               <i class="fa-solid fa-chevron-down text-emerald-400 mt-2 transition-transform"></i>
             </div>
             <div class="dropdown mt-6 text-sm text-zinc-300 space-y-3 pl-2 border-l border-emerald-500/30">
-              <div>• Romance & Investment Scam Tracing</div>
-              <div>• Impersonation Cases</div>
-              <div>• Financial Fraud Investigation</div>
-              <div>• Live Location Tracking</div>
+              <div>- Romance and Investment Scam Tracing</div>
+              <div>- Impersonation Cases</div>
+              <div>- Financial Fraud Investigation</div>
+              <div>- Live Location Tracking</div>
             </div>
           </div>
 
-          <div class="service-card glass rounded-3xl p-6 md:p-8 cursor-pointer lg:col-span-3" onclick="toggleDropdown(this)">
+          <!-- NEW: Private Investigator standalone card -->
+          <div class="service-card glass rounded-3xl p-6 md:p-8 cursor-pointer" onclick="toggleDropdown(this)">
+            <div class="flex justify-between items-start">
+              <div class="flex-1">
+                <div class="text-emerald-400 text-4xl mb-4"><i class="fa-solid fa-user-tie"></i></div>
+                <h3 class="text-xl md:text-2xl font-semibold">Private Investigator</h3>
+                <p class="text-zinc-400 mt-2 text-sm md:text-base">Confidential personal and corporate investigation services.</p>
+              </div>
+              <i class="fa-solid fa-chevron-down text-emerald-400 mt-2 transition-transform"></i>
+            </div>
+            <div class="dropdown mt-6 text-sm text-zinc-300 pl-2 border-l border-emerald-500/30">
+              <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3">Private Services</p>
+              <div class="space-y-3 mb-5">
+                <div>- Missing Persons</div>
+                <div>- Surveillance and Investigation</div>
+                <div>- Bug Sweeping for Home</div>
+                <div>- Catch a Cheating Partner</div>
+                <div>- Background Checks</div>
+                <div>- Due Diligence</div>
+                <div>- Criminal and Civil Investigations</div>
+                <div>- Elder Abuse Investigation</div>
+              </div>
+              <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3">Corporate Services</p>
+              <div class="space-y-3">
+                <div>- Employment Screening</div>
+                <div>- Workplace Theft</div>
+                <div>- Bug Sweeping for Office</div>
+                <div>- Employee Surveillance</div>
+                <div>- Due Diligence</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Others — spans 2 cols on lg -->
+          <div class="service-card glass rounded-3xl p-6 md:p-8 cursor-pointer md:col-span-2" onclick="toggleDropdown(this)">
             <div class="flex justify-between items-start">
               <div class="flex-1">
                 <div class="text-emerald-400 text-4xl mb-4"><i class="fa-solid fa-ellipsis"></i></div>
@@ -218,17 +193,17 @@
             </div>
             <div class="dropdown mt-6 grid md:grid-cols-2 gap-4 text-sm text-zinc-300 pl-2 border-l border-emerald-500/30">
               <div class="space-y-3">
-                <div>• Cybersecurity assessments and ethical hacking</div>
-                <div>• Digital forensics and evidence recovery</div>
-                <div>• Account security and breach investigations</div>
-                <div>• Scam and fraud analysis</div>
+                <div>- Cybersecurity assessments and ethical hacking</div>
+                <div>- Digital forensics and evidence recovery</div>
+                <div>- Account security and breach investigations</div>
+                <div>- Scam and fraud analysis</div>
               </div>
               <div class="space-y-3">
-                <div>• Online reputation support</div>
-                <div>• Technical troubleshooting and consultation</div>
-                <div>• Data recovery and device analysis</div>
-                <div>• Business security advisory</div>
-                <div class="text-emerald-400 font-semibold pt-2">* Need Help With Something Not Listed Above? We're Ready to Assist</div>
+                <div>- Online reputation support</div>
+                <div>- Technical troubleshooting and consultation</div>
+                <div>- Data recovery and device analysis</div>
+                <div>- Business security advisory</div>
+                <div class="text-emerald-400 font-semibold pt-2">* Need Help With Something Not Listed? We are Ready to Assist</div>
               </div>
             </div>
           </div>
@@ -241,27 +216,12 @@
       <div class="max-w-4xl mx-auto px-6 text-center border-y border-white/5 py-16">
         <h2 class="text-3xl font-bold mb-4">Trust Statement</h2>
         <p class="text-emerald-400 text-xl font-medium tracking-wide mb-6">Discreet. Professional. Results-Driven.</p>
-        <p class="text-zinc-400 text-lg leading-relaxed">
-          Your privacy is our priority. Every case is handled with strict confidentiality and a commitment to ethical, legal, and effective solutions.
-        </p>
-
+        <p class="text-zinc-400 text-lg leading-relaxed">Your privacy is our priority. Every case is handled with strict confidentiality and a commitment to ethical, legal, and effective solutions.</p>
         <div class="grid md:grid-cols-2 gap-8 mt-16 text-left">
-          <div class="glass p-8 rounded-3xl">
-            <h4 class="text-emerald-400 font-bold mb-4">Proven Expertise</h4>
-            <p class="text-sm text-zinc-400">Years of hands-on experience in ethical hacking, cybersecurity, and digital investigations.</p>
-          </div>
-          <div class="glass p-8 rounded-3xl">
-            <h4 class="text-emerald-400 font-bold mb-4">Global Reach</h4>
-            <p class="text-sm text-zinc-400">We work with clients from anywhere in the world.</p>
-          </div>
-          <div class="glass p-8 rounded-3xl">
-            <h4 class="text-emerald-400 font-bold mb-4">Complete Confidentiality</h4>
-            <p class="text-sm text-zinc-400">Your information and case details remain private and secure.</p>
-          </div>
-          <div class="glass p-8 rounded-3xl">
-            <h4 class="text-emerald-400 font-bold mb-4">Tailored Solutions</h4>
-            <p class="text-sm text-zinc-400">Every challenge is unique, and so is our approach.</p>
-          </div>
+          <div class="glass p-8 rounded-3xl"><h4 class="text-emerald-400 font-bold mb-4">Proven Expertise</h4><p class="text-sm text-zinc-400">Years of hands-on experience in ethical hacking, cybersecurity, and digital investigations.</p></div>
+          <div class="glass p-8 rounded-3xl"><h4 class="text-emerald-400 font-bold mb-4">Global Reach</h4><p class="text-sm text-zinc-400">We work with clients from anywhere in the world.</p></div>
+          <div class="glass p-8 rounded-3xl"><h4 class="text-emerald-400 font-bold mb-4">Complete Confidentiality</h4><p class="text-sm text-zinc-400">Your information and case details remain private and secure.</p></div>
+          <div class="glass p-8 rounded-3xl"><h4 class="text-emerald-400 font-bold mb-4">Tailored Solutions</h4><p class="text-sm text-zinc-400">Every challenge is unique, and so is our approach.</p></div>
         </div>
       </div>
     </section>
@@ -270,26 +230,10 @@
       <div class="max-w-7xl mx-auto px-6">
         <h2 class="text-4xl font-bold text-center mb-16">How It Works</h2>
         <div class="grid md:grid-cols-4 gap-8">
-          <div class="text-center">
-            <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 font-bold">1</div>
-            <h4 class="font-bold mb-2">Contact Us</h4>
-            <p class="text-sm text-zinc-400">Reach out through Telegram and briefly describe your challenge.</p>
-          </div>
-          <div class="text-center">
-            <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 font-bold">2</div>
-            <h4 class="font-bold mb-2">Confidential Review</h4>
-            <p class="text-sm text-zinc-400">We assess your situation and determine the best legal and ethical approach.</p>
-          </div>
-          <div class="text-center">
-            <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 font-bold">3</div>
-            <h4 class="font-bold mb-2">Customized Solution</h4>
-            <p class="text-sm text-zinc-400">We provide expert assistance designed to resolve your issue effectively.</p>
-          </div>
-          <div class="text-center">
-            <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 font-bold">4</div>
-            <h4 class="font-bold mb-2">Ongoing Support</h4>
-            <p class="text-sm text-zinc-400">We stay with you until the matter is resolved.</p>
-          </div>
+          <div class="text-center"><div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 font-bold">1</div><h4 class="font-bold mb-2">Contact Us</h4><p class="text-sm text-zinc-400">Reach out through Telegram and briefly describe your challenge.</p></div>
+          <div class="text-center"><div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 font-bold">2</div><h4 class="font-bold mb-2">Confidential Review</h4><p class="text-sm text-zinc-400">We assess your situation and determine the best legal and ethical approach.</p></div>
+          <div class="text-center"><div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 font-bold">3</div><h4 class="font-bold mb-2">Customized Solution</h4><p class="text-sm text-zinc-400">We provide expert assistance designed to resolve your issue effectively.</p></div>
+          <div class="text-center"><div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 font-bold">4</div><h4 class="font-bold mb-2">Ongoing Support</h4><p class="text-sm text-zinc-400">We stay with you until the matter is resolved.</p></div>
         </div>
       </div>
     </section>
@@ -298,30 +242,27 @@
       <div class="max-w-7xl mx-auto px-6">
         <h2 class="text-3xl font-bold text-center mb-12">Industries We Serve</h2>
         <div class="flex flex-wrap justify-center gap-4">
-          <span class="glass px-6 py-2 rounded-full text-sm">• Individuals</span>
-          <span class="glass px-6 py-2 rounded-full text-sm">• Small Businesses</span>
-          <span class="glass px-6 py-2 rounded-full text-sm">• Startups</span>
-          <span class="glass px-6 py-2 rounded-full text-sm">• Corporate Organizations</span>
-          <span class="glass px-6 py-2 rounded-full text-sm">• Legal Professionals</span>
-          <span class="glass px-6 py-2 rounded-full text-sm">• Real Estate Companies</span>
-          <span class="glass px-6 py-2 rounded-full text-sm">• Online Entrepreneurs</span>
-          <span class="glass px-6 py-2 rounded-full text-sm">• Students</span>
+          <span class="glass px-6 py-2 rounded-full text-sm">Individuals</span>
+          <span class="glass px-6 py-2 rounded-full text-sm">Small Businesses</span>
+          <span class="glass px-6 py-2 rounded-full text-sm">Startups</span>
+          <span class="glass px-6 py-2 rounded-full text-sm">Corporate Organizations</span>
+          <span class="glass px-6 py-2 rounded-full text-sm">Legal Professionals</span>
+          <span class="glass px-6 py-2 rounded-full text-sm">Real Estate Companies</span>
+          <span class="glass px-6 py-2 rounded-full text-sm">Online Entrepreneurs</span>
+          <span class="glass px-6 py-2 rounded-full text-sm">Students</span>
         </div>
       </div>
     </section>
 
     <section class="py-20 bg-emerald-600 text-center text-white px-6">
       <h2 class="text-4xl font-bold mb-6">Need Help With a Complex Problem?</h2>
-      <p class="max-w-2xl mx-auto mb-10 text-lg opacity-90">
-        Whether you're dealing with cybersecurity concerns, technical challenges, or digital investigations, Linchpin Service is here to help. Contact us securely on Telegram and get expert assistance today.
-      </p>
+      <p class="max-w-2xl mx-auto mb-10 text-lg opacity-90">Whether you are dealing with cybersecurity concerns, technical challenges, or digital investigations, Linchpin Service is here to help. Contact us securely on Telegram and get expert assistance today.</p>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="https://t.me/linchpin_service" target="_blank" class="bg-black px-8 py-4 rounded-2xl font-bold hover:bg-zinc-900 transition">Chat With Us on Telegram</a>
         <a href="https://t.me/linchpin_service" target="_blank" class="bg-white text-emerald-600 px-8 py-4 rounded-2xl font-bold hover:bg-zinc-100 transition">Get Confidential Assistance</a>
       </div>
     </section>
 
-    <!-- Footer (home) -->
     <footer class="bg-zinc-950 pt-20 pb-10 border-t border-white/5">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid md:grid-cols-2 gap-12 mb-16">
@@ -330,16 +271,14 @@
               <div class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center font-bold">L</div>
               <span class="text-xl font-bold">Linchpin Service</span>
             </div>
-            <p class="text-zinc-400 leading-relaxed text-sm">
-              At Linchpin Service, we provide confidential cybersecurity, digital investigation, and technical support to help individuals and businesses overcome challenging situations that require specialized expertise.
-            </p>
+            <p class="text-zinc-400 leading-relaxed text-sm">At Linchpin Service, we provide confidential cybersecurity, digital investigation, and technical support to help individuals and businesses overcome challenging situations that require specialized expertise.</p>
           </div>
           <div class="grid grid-cols-2 gap-8">
             <div class="space-y-4">
               <h5 class="font-bold">Call-to-Action</h5>
               <ul class="text-sm text-zinc-500 space-y-2">
-                <li><a href="https://t.me/linchpin_service" class="hover:text-emerald-400">• Speak to an Expert Now</a></li>
-                <li><a href="https://t.me/linchpin_service" class="hover:text-emerald-400">• Request Immediate Help</a></li>
+                <li><a href="https://t.me/linchpin_service" class="hover:text-emerald-400">Speak to an Expert Now</a></li>
+                <li><a href="https://t.me/linchpin_service" class="hover:text-emerald-400">Request Immediate Help</a></li>
               </ul>
             </div>
             <div class="space-y-4 text-right">
@@ -349,144 +288,100 @@
           </div>
         </div>
         <div class="border-t border-white/5 pt-8 text-center text-zinc-600 text-sm">
-          <p>Linchpin Service — Solving Complex Problems with Technology and Trust.</p>
+          <p>Linchpin Service - Solving Complex Problems with Technology and Trust.</p>
         </div>
       </div>
     </footer>
+  </div>
 
-  </div><!-- end #page-home -->
+  <!-- BLOG PAGE -->
+  <div id="page-blog" class="page">
+    <div class="min-h-screen bg-gradient-to-b from-zinc-950 to-black pt-32 pb-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-emerald-400 text-sm font-semibold uppercase tracking-widest mb-4 block">Insights and Updates</span>
+          <h1 class="text-5xl md:text-6xl font-bold tracking-tight mb-5">Our Blog</h1>
+          <p class="text-zinc-400 text-lg max-w-xl mx-auto">Expert articles on cybersecurity, digital investigations, fraud prevention, and online safety.</p>
+        </div>
 
+        <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div class="glass rounded-3xl overflow-hidden"><div class="h-48 skeleton"></div><div class="p-6 space-y-3"><div class="h-4 skeleton w-1/3"></div><div class="h-5 skeleton w-4/5"></div><div class="h-4 skeleton w-full"></div><div class="h-4 skeleton w-2/3"></div></div></div>
+          <div class="glass rounded-3xl overflow-hidden"><div class="h-48 skeleton"></div><div class="p-6 space-y-3"><div class="h-4 skeleton w-1/3"></div><div class="h-5 skeleton w-4/5"></div><div class="h-4 skeleton w-full"></div><div class="h-4 skeleton w-2/3"></div></div></div>
+          <div class="glass rounded-3xl overflow-hidden"><div class="h-48 skeleton"></div><div class="p-6 space-y-3"><div class="h-4 skeleton w-1/3"></div><div class="h-5 skeleton w-4/5"></div><div class="h-4 skeleton w-full"></div><div class="h-4 skeleton w-2/3"></div></div></div>
+        </div>
 
-  <!-- ==================== CONTACT PAGE ==================== -->
+        <div id="blog-empty" class="hidden mt-8 glass rounded-3xl p-10 md:p-14 text-center max-w-3xl mx-auto">
+          <div class="text-emerald-400 text-4xl mb-5"><i class="fa-solid fa-pen-to-square"></i></div>
+          <h3 class="text-2xl font-bold mb-3">Articles Coming Soon</h3>
+          <p class="text-zinc-400 mb-8">Expert insights on cybersecurity, fraud prevention, and digital safety are on the way. Reach out to us on Telegram in the meantime.</p>
+          <a href="https://t.me/linchpin_service" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 px-8 py-4 rounded-2xl font-semibold inline-flex items-center gap-3 transition"><i class="fa-brands fa-telegram"></i> Talk to Us on Telegram</a>
+        </div>
+        <div id="blog-error" class="hidden mt-4 text-center text-zinc-500 text-sm">Could not load articles right now. <a href="https://t.me/linchpin_service" class="text-emerald-400 hover:underline">Contact us on Telegram</a>.</div>
+      </div>
+    </div>
+    <footer class="bg-zinc-950 pt-10 pb-8 border-t border-white/5"><div class="max-w-7xl mx-auto px-6 text-center text-zinc-600 text-sm"><p>Linchpin Service - Solving Complex Problems with Technology and Trust.</p></div></footer>
+  </div>
+
+  <!-- CONTACT PAGE -->
   <div id="page-contact" class="page">
     <div class="min-h-screen bg-gradient-to-b from-zinc-950 to-black pt-32 pb-20">
       <div class="max-w-7xl mx-auto px-6">
-
-        <!-- Header -->
         <div class="text-center mb-16">
           <span class="text-emerald-400 text-sm font-semibold uppercase tracking-widest mb-4 block">Get In Touch</span>
           <h1 class="text-5xl md:text-6xl font-bold tracking-tight mb-5">Contact Us</h1>
-          <p class="text-zinc-400 text-lg max-w-xl mx-auto">
-            Have a confidential enquiry or a complex problem to solve? Send us a message and we'll get back to you within <span class="text-emerald-400 font-semibold">24 hours</span>.
-          </p>
+          <p class="text-zinc-400 text-lg max-w-xl mx-auto">Have a confidential enquiry? Send us a message and we will get back to you within <span class="text-emerald-400 font-semibold">24 hours</span>.</p>
         </div>
-
         <div class="grid lg:grid-cols-5 gap-10 max-w-6xl mx-auto">
-
-          <!-- Left info panel -->
           <div class="lg:col-span-2 space-y-6">
-
-            <div class="glass rounded-3xl p-8">
-              <div class="text-emerald-400 text-3xl mb-4"><i class="fa-solid fa-clock"></i></div>
-              <h4 class="font-bold text-lg mb-2">24-Hour Response</h4>
-              <p class="text-zinc-400 text-sm leading-relaxed">We review every message and respond within 24 hours. For urgent matters, Telegram is fastest.</p>
-            </div>
-
-            <div class="glass rounded-3xl p-8">
-              <div class="text-emerald-400 text-3xl mb-4"><i class="fa-solid fa-lock"></i></div>
-              <h4 class="font-bold text-lg mb-2">Strictly Confidential</h4>
-              <p class="text-zinc-400 text-sm leading-relaxed">All messages are handled with complete discretion. Your details are never shared with third parties.</p>
-            </div>
-
-            <div class="glass rounded-3xl p-8">
-              <div class="text-emerald-400 text-3xl mb-4"><i class="fa-brands fa-telegram"></i></div>
-              <h4 class="font-bold text-lg mb-2">Prefer Telegram?</h4>
-              <p class="text-zinc-400 text-sm leading-relaxed mb-4">For the fastest, most secure channel, reach us directly on Telegram.</p>
-              <a href="https://t.me/linchpin_service" target="_blank"
-                 class="bg-emerald-600 hover:bg-emerald-500 px-5 py-3 rounded-xl font-semibold text-sm inline-flex items-center gap-2 transition">
-                <i class="fa-brands fa-telegram"></i>
-                @linchpin_service
-              </a>
-            </div>
-
+            <div class="glass rounded-3xl p-8"><div class="text-emerald-400 text-3xl mb-4"><i class="fa-solid fa-clock"></i></div><h4 class="font-bold text-lg mb-2">24-Hour Response</h4><p class="text-zinc-400 text-sm leading-relaxed">We review every message and respond within 24 hours. For urgent matters, Telegram is fastest.</p></div>
+            <div class="glass rounded-3xl p-8"><div class="text-emerald-400 text-3xl mb-4"><i class="fa-solid fa-lock"></i></div><h4 class="font-bold text-lg mb-2">Strictly Confidential</h4><p class="text-zinc-400 text-sm leading-relaxed">All messages are handled with complete discretion. Your details are never shared with third parties.</p></div>
+            <div class="glass rounded-3xl p-8"><div class="text-emerald-400 text-3xl mb-4"><i class="fa-brands fa-telegram"></i></div><h4 class="font-bold text-lg mb-2">Prefer Telegram?</h4><p class="text-zinc-400 text-sm leading-relaxed mb-4">For the fastest, most secure channel, reach us directly on Telegram.</p><a href="https://t.me/linchpin_service" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 px-5 py-3 rounded-xl font-semibold text-sm inline-flex items-center gap-2 transition"><i class="fa-brands fa-telegram"></i> @linchpin_service</a></div>
           </div>
-
-          <!-- Right form -->
           <div class="lg:col-span-3">
             <div class="glass rounded-3xl p-8 md:p-10">
               <h3 class="text-2xl font-bold mb-2">Send Us a Message</h3>
-              <p class="text-zinc-500 text-sm mb-8">We'll get in touch within 24 hours.</p>
-
-              <!-- IMPORTANT: Replace YOUR_FORM_ID below with your actual Formspree form ID -->
-              <!-- Get your free form ID at https://formspree.io -->
+              <p class="text-zinc-500 text-sm mb-8">We will get in touch within 24 hours.</p>
               <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleSubmit(event)">
-
                 <div class="grid md:grid-cols-2 gap-5 mb-5">
-                  <div>
-                    <label class="block text-sm font-medium text-zinc-300 mb-2">Full Name <span class="text-emerald-400">*</span></label>
-                    <input type="text" name="name" required placeholder="John Doe"
-                           class="form-input w-full px-4 py-3 rounded-2xl text-sm">
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-zinc-300 mb-2">Email Address <span class="text-emerald-400">*</span></label>
-                    <input type="email" name="email" required placeholder="you@example.com"
-                           class="form-input w-full px-4 py-3 rounded-2xl text-sm">
-                  </div>
+                  <div><label class="block text-sm font-medium text-zinc-300 mb-2">Full Name <span class="text-emerald-400">*</span></label><input type="text" name="name" required placeholder="John Doe" class="form-input w-full px-4 py-3 rounded-2xl text-sm"></div>
+                  <div><label class="block text-sm font-medium text-zinc-300 mb-2">Email Address <span class="text-emerald-400">*</span></label><input type="email" name="email" required placeholder="you@example.com" class="form-input w-full px-4 py-3 rounded-2xl text-sm"></div>
                 </div>
-
                 <div class="mb-5">
                   <label class="block text-sm font-medium text-zinc-300 mb-2">Subject <span class="text-emerald-400">*</span></label>
                   <select name="subject" required class="form-input w-full px-4 py-3 rounded-2xl text-sm">
                     <option value="" disabled selected>Select a subject...</option>
-                    <option value="Penetration Testing">Penetration Testing</option>
-                    <option value="OSINT & Digital Investigation">OSINT & Digital Investigation</option>
-                    <option value="Fraud & Scam Investigation">Fraud & Scam Investigation</option>
-                    <option value="Digital Forensics">Digital Forensics</option>
-                    <option value="Cybersecurity Assessment">Cybersecurity Assessment</option>
-                    <option value="Other / General Enquiry">Other / General Enquiry</option>
+                    <option>Penetration Testing</option>
+                    <option>OSINT and Digital Investigation</option>
+                    <option>Fraud and Scam Investigation</option>
+                    <option>Private Investigator Services</option>
+                    <option>Digital Forensics</option>
+                    <option>Cybersecurity Assessment</option>
+                    <option>Other / General Enquiry</option>
                   </select>
                 </div>
-
-                <div class="mb-5">
-                  <label class="block text-sm font-medium text-zinc-300 mb-2">Your Message <span class="text-emerald-400">*</span></label>
-                  <textarea name="message" required rows="6" placeholder="Briefly describe your situation or what you need help with..."
-                            class="form-input w-full px-4 py-3 rounded-2xl text-sm resize-none"></textarea>
-                </div>
-
-                <!-- Honeypot spam filter -->
+                <div class="mb-5"><label class="block text-sm font-medium text-zinc-300 mb-2">Your Message <span class="text-emerald-400">*</span></label><textarea name="message" required rows="6" placeholder="Briefly describe your situation or what you need help with..." class="form-input w-full px-4 py-3 rounded-2xl text-sm resize-none"></textarea></div>
                 <input type="text" name="_gotcha" style="display:none">
-
                 <div class="flex items-start gap-3 mb-8">
                   <input type="checkbox" id="privacy" required class="mt-1 accent-emerald-500">
-                  <label for="privacy" class="text-zinc-400 text-sm leading-relaxed">
-                    I understand my information will be handled with strict confidentiality and agree to Linchpin Service's privacy practices.
-                  </label>
+                  <label for="privacy" class="text-zinc-400 text-sm leading-relaxed">I understand my information will be handled with strict confidentiality and agree to Linchpin Service's privacy practices.</label>
                 </div>
-
-                <button type="submit" id="submit-btn"
-                        class="w-full bg-emerald-600 hover:bg-emerald-500 px-8 py-4 rounded-2xl font-semibold flex items-center justify-center gap-3 transition text-base">
-                  <i class="fa-solid fa-paper-plane" id="btn-icon"></i>
-                  <span id="btn-text">Send Message</span>
+                <button type="submit" id="submit-btn" class="w-full bg-emerald-600 hover:bg-emerald-500 px-8 py-4 rounded-2xl font-semibold flex items-center justify-center gap-3 transition text-base">
+                  <i class="fa-solid fa-paper-plane" id="btn-icon"></i><span id="btn-text">Send Message</span>
                 </button>
-
               </form>
             </div>
           </div>
-
-        </div><!-- end grid -->
+        </div>
       </div>
     </div>
+    <footer class="bg-zinc-950 pt-10 pb-8 border-t border-white/5"><div class="max-w-7xl mx-auto px-6 text-center text-zinc-600 text-sm"><p>Linchpin Service - Solving Complex Problems with Technology and Trust.</p></div></footer>
+  </div>
 
-    <!-- Contact footer -->
-    <footer class="bg-zinc-950 pt-10 pb-8 border-t border-white/5">
-      <div class="max-w-7xl mx-auto px-6 text-center text-zinc-600 text-sm">
-        <p>Linchpin Service — Solving Complex Problems with Technology and Trust.</p>
-      </div>
-    </footer>
-
-  </div><!-- end #page-contact -->
-
-
-  <!-- Floating chat button -->
-  <button onclick="alert('Live Chat - Best contacted via Telegram')" 
-          class="fixed bottom-6 right-6 bg-emerald-600 hover:bg-emerald-500 px-6 py-4 rounded-3xl flex items-center gap-3 shadow-2xl z-50 transition hover:scale-105">
-    <span class="text-3xl"></span>
-    <span class="font-semibold hidden sm:inline">Live Chat</span>
+  <button onclick="alert('Live Chat - Best contacted via Telegram')" class="fixed bottom-6 right-6 bg-emerald-600 hover:bg-emerald-500 px-6 py-4 rounded-3xl flex items-center gap-3 shadow-2xl z-50 transition hover:scale-105">
+    <span class="font-semibold">Live Chat</span>
   </button>
 
-
   <script>
-    /* ---- Mobile menu ---- */
     let menuOpen = false;
     function toggleMobileMenu() {
       menuOpen = !menuOpen;
@@ -514,69 +409,109 @@
       lines[1].style.opacity = '1';
       lines[2].style.transform = '';
     }
-
-    /* ---- Page routing ---- */
     function showPage(name) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById('page-' + name).classList.add('active');
-      document.querySelectorAll('.nav-link[data-page]').forEach(a => {
-        a.classList.toggle('active', a.dataset.page === name);
-      });
+      document.querySelectorAll('.nav-link[data-page]').forEach(a => a.classList.toggle('active', a.dataset.page === name));
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (name === 'blog' && !blogLoaded) loadBlog();
       return false;
     }
-
-    /* ---- Dropdown toggle ---- */
     function toggleDropdown(card) {
       card.classList.toggle('expanded');
       const chevron = card.querySelector('.fa-chevron-down');
-      if (chevron) {
-        chevron.style.transform = card.classList.contains('expanded') ? 'rotate(180deg)' : '';
-      }
+      if (chevron) chevron.style.transform = card.classList.contains('expanded') ? 'rotate(180deg)' : '';
     }
-
-    /* ---- Contact form submission ---- */
     async function handleSubmit(e) {
       e.preventDefault();
       const form = document.getElementById('contact-form');
       const btn = document.getElementById('submit-btn');
       const btnText = document.getElementById('btn-text');
       const btnIcon = document.getElementById('btn-icon');
-
-      // Button loading state
       btn.disabled = true;
       btnIcon.className = 'fa-solid fa-spinner fa-spin';
       btnText.textContent = 'Sending...';
-
       try {
-        const data = new FormData(form);
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-          form.reset();
-          showToast();
-        } else {
-          alert('Something went wrong. Please try again or contact us on Telegram.');
-        }
-      } catch (err) {
-        alert('Network error. Please try again or contact us on Telegram.');
-      }
-
-      // Reset button
+        const response = await fetch(form.action, { method:'POST', body: new FormData(form), headers:{'Accept':'application/json'} });
+        if (response.ok) { form.reset(); showToast(); }
+        else alert('Something went wrong. Please try again or contact us on Telegram.');
+      } catch { alert('Network error. Please try again or contact us on Telegram.'); }
       btn.disabled = false;
       btnIcon.className = 'fa-solid fa-paper-plane';
       btnText.textContent = 'Send Message';
     }
-
-    /* ---- Toast notification ---- */
     function showToast() {
       const t = document.getElementById('toast');
       t.classList.add('show');
       setTimeout(() => t.classList.remove('show'), 4000);
+    }
+
+    /* -------------------------------------------------------
+       BLOG — powered by Hashnode (free, no backend needed)
+
+       HOW YOUR CLIENT SETS UP THE BLOG:
+       1. Go to https://hashnode.com and sign up free
+       2. Click profile icon top-right → "Create a Publication"
+       3. Choose a username e.g. "linchpinservices"
+       4. Send Femi that username so he can put it in the code below
+       5. Client writes posts in Hashnode (like Google Docs)
+       6. Posts appear on this site automatically — no code needed
+    ------------------------------------------------------- */
+    let blogLoaded = false;
+    const HASHNODE_USERNAME = 'YOUR_HASHNODE_USERNAME'; // <-- replace this
+
+    async function loadBlog() {
+      blogLoaded = true;
+      const grid = document.getElementById('blog-grid');
+      const empty = document.getElementById('blog-empty');
+      const error = document.getElementById('blog-error');
+
+      if (HASHNODE_USERNAME === 'YOUR_HASHNODE_USERNAME') {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+
+      try {
+        const query = `query {
+          publication(host: "${HASHNODE_USERNAME}.hashnode.dev") {
+            posts(first: 6) {
+              edges {
+                node {
+                  title brief slug url publishedAt
+                  coverImage { url }
+                  tags { name }
+                }
+              }
+            }
+          }
+        }`;
+        const res = await fetch('https://gql.hashnode.com', {
+          method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ query })
+        });
+        const data = await res.json();
+        const posts = data?.data?.publication?.posts?.edges;
+        if (!posts || posts.length === 0) { grid.innerHTML = ''; empty.classList.remove('hidden'); return; }
+        grid.innerHTML = posts.map(({node:p}) => {
+          const date = new Date(p.publishedAt).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
+          const tag = p.tags?.[0]?.name || 'Article';
+          const cover = p.coverImage?.url || '';
+          return `<a href="${p.url}" target="_blank" rel="noopener" class="blog-card glass rounded-3xl overflow-hidden block group">
+            <div class="h-48 bg-gradient-to-br from-emerald-900/40 to-zinc-900 overflow-hidden">
+              ${cover ? `<img src="${cover}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">` : `<div class="w-full h-full flex items-center justify-center"><i class="fa-solid fa-shield-halved text-5xl text-emerald-500/30"></i></div>`}
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="bg-emerald-500/15 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full">${tag}</span>
+                <span class="text-zinc-600 text-xs">${date}</span>
+              </div>
+              <h3 class="font-bold text-base md:text-lg mb-2 leading-snug group-hover:text-emerald-400 transition">${p.title}</h3>
+              <p class="text-zinc-400 text-sm leading-relaxed line-clamp-3">${p.brief || ''}</p>
+              <div class="mt-4 text-emerald-400 text-sm font-semibold flex items-center gap-1">Read article <i class="fa-solid fa-arrow-right text-xs"></i></div>
+            </div>
+          </a>`;
+        }).join('');
+      } catch(err) { grid.innerHTML = ''; error.classList.remove('hidden'); }
     }
   </script>
 </body>

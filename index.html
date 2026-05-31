@@ -447,58 +447,41 @@
     }
 
     /* -------------------------------------------------------
-       BLOG — powered by Hashnode (free, no backend needed)
-
-       HOW YOUR CLIENT SETS UP THE BLOG:
-       1. Go to https://hashnode.com and sign up free
-       2. Click profile icon top-right → "Create a Publication"
-       3. Choose a username e.g. "linchpinservices"
-       4. Send Femi that username so he can put it in the code below
-       5. Client writes posts in Hashnode (like Google Docs)
-       6. Posts appear on this site automatically — no code needed
+       BLOG — powered by Hashnode RSS feed (free, always works)
+       Client writes posts on linchpinservice.hashnode.dev
+       Posts appear here automatically. No backend needed.
     ------------------------------------------------------- */
     let blogLoaded = false;
-    const HASHNODE_USERNAME = 'YOUR_HASHNODE_USERNAME'; // <-- replace this
+    const HASHNODE_RSS = 'https://linchpinservice.hashnode.dev/rss.xml';
+    const RSS_PROXY   = 'https://api.rss2json.com/v1/api.json?rss_url=';
 
     async function loadBlog() {
       blogLoaded = true;
-      const grid = document.getElementById('blog-grid');
+      const grid  = document.getElementById('blog-grid');
       const empty = document.getElementById('blog-empty');
       const error = document.getElementById('blog-error');
 
-      if (HASHNODE_USERNAME === 'YOUR_HASHNODE_USERNAME') {
-        grid.innerHTML = '';
-        empty.classList.remove('hidden');
-        return;
-      }
-
       try {
-        const query = `query {
-          publication(host: "${HASHNODE_USERNAME}.hashnode.dev") {
-            posts(first: 6) {
-              edges {
-                node {
-                  title brief slug url publishedAt
-                  coverImage { url }
-                  tags { name }
-                }
-              }
-            }
-          }
-        }`;
-        const res = await fetch('https://gql.hashnode.com', {
-          method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ query })
-        });
+        const res  = await fetch(RSS_PROXY + encodeURIComponent(HASHNODE_RSS));
         const data = await res.json();
-        const posts = data?.data?.publication?.posts?.edges;
-        if (!posts || posts.length === 0) { grid.innerHTML = ''; empty.classList.remove('hidden'); return; }
-        grid.innerHTML = posts.map(({node:p}) => {
-          const date = new Date(p.publishedAt).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
-          const tag = p.tags?.[0]?.name || 'Article';
-          const cover = p.coverImage?.url || '';
-          return `<a href="${p.url}" target="_blank" rel="noopener" class="blog-card glass rounded-3xl overflow-hidden block group">
+        const items = data?.items;
+
+        if (!items || items.length === 0) {
+          grid.innerHTML = '';
+          empty.classList.remove('hidden');
+          return;
+        }
+
+        grid.innerHTML = items.slice(0, 6).map(p => {
+          const date  = new Date(p.pubDate).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
+          const tag   = (p.categories && p.categories[0]) || 'Article';
+          const cover = p.thumbnail || p.enclosure?.link || '';
+          const brief = p.description ? p.description.replace(/<[^>]+>/g,'').slice(0,160) + '...' : '';
+          return `<a href="${p.link}" target="_blank" rel="noopener" class="blog-card glass rounded-3xl overflow-hidden block group">
             <div class="h-48 bg-gradient-to-br from-emerald-900/40 to-zinc-900 overflow-hidden">
-              ${cover ? `<img src="${cover}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">` : `<div class="w-full h-full flex items-center justify-center"><i class="fa-solid fa-shield-halved text-5xl text-emerald-500/30"></i></div>`}
+              ${cover
+                ? `<img src="${cover}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center\\'><i class=\\'fa-solid fa-shield-halved text-5xl text-emerald-500/30\\'></i></div>'">`
+                : `<div class="w-full h-full flex items-center justify-center"><i class="fa-solid fa-shield-halved text-5xl text-emerald-500/30"></i></div>`}
             </div>
             <div class="p-6">
               <div class="flex items-center gap-3 mb-3">
@@ -506,12 +489,16 @@
                 <span class="text-zinc-600 text-xs">${date}</span>
               </div>
               <h3 class="font-bold text-base md:text-lg mb-2 leading-snug group-hover:text-emerald-400 transition">${p.title}</h3>
-              <p class="text-zinc-400 text-sm leading-relaxed line-clamp-3">${p.brief || ''}</p>
+              <p class="text-zinc-400 text-sm leading-relaxed line-clamp-3">${brief}</p>
               <div class="mt-4 text-emerald-400 text-sm font-semibold flex items-center gap-1">Read article <i class="fa-solid fa-arrow-right text-xs"></i></div>
             </div>
           </a>`;
         }).join('');
-      } catch(err) { grid.innerHTML = ''; error.classList.remove('hidden'); }
+
+      } catch(err) {
+        grid.innerHTML = '';
+        error.classList.remove('hidden');
+      }
     }
   </script>
 </body>

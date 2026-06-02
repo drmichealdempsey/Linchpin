@@ -14,8 +14,21 @@
     .expanded .dropdown { max-height: 900px; }
     .page { display: none; }
     .page.active { display: block; }
-    .blog-card { transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
-    .blog-card:hover { transform: translateY(-4px); }
+    .blog-card { transition: all 0.4s cubic-bezier(0.4,0,0.2,1); cursor:pointer; }
+    .blog-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.09); }
+    .prose h2 { font-size:1.4rem; font-weight:700; color:#fff; margin:2rem 0 0.75rem; }
+    .prose h3 { font-size:1.15rem; font-weight:700; color:#34d399; margin:1.5rem 0 0.5rem; }
+    .prose p { color:#a1a1aa; line-height:1.85; margin-bottom:1rem; }
+    .prose ul { list-style:disc; padding-left:1.5rem; color:#a1a1aa; margin-bottom:1rem; }
+    .prose ul li { margin-bottom:0.4rem; line-height:1.75; }
+    .prose ol { list-style:decimal; padding-left:1.5rem; color:#a1a1aa; margin-bottom:1rem; }
+    .prose ol li { margin-bottom:0.4rem; line-height:1.75; }
+    .comment-box { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:#fff; border-radius:12px; padding:12px 16px; width:100%; font-size:14px; transition:border-color 0.3s; resize:vertical; font-family:inherit; }
+    .comment-box:focus { outline:none; border-color:#10b981; }
+    .comment-box::placeholder { color:rgba(255,255,255,0.3); }
+    .cinput { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:#fff; border-radius:12px; padding:12px 16px; width:100%; font-size:14px; transition:border-color 0.3s; font-family:inherit; }
+    .cinput:focus { outline:none; border-color:#10b981; }
+    .cinput::placeholder { color:rgba(255,255,255,0.3); }
     .form-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color:#fff; transition: border-color 0.3s; }
     .form-input:focus { outline: none; border-color: #10b981; background: rgba(255,255,255,0.08); }
     .form-input::placeholder { color: rgba(255,255,255,0.3); }
@@ -298,7 +311,7 @@
     </footer>
   </div>
 
-  <!-- BLOG PAGE -->
+  <!-- BLOG LIST PAGE -->
   <div id="page-blog" class="page">
     <div class="min-h-screen bg-gradient-to-b from-zinc-950 to-black pt-32 pb-20">
       <div class="max-w-7xl mx-auto px-6">
@@ -307,20 +320,183 @@
           <h1 class="text-5xl md:text-6xl font-bold tracking-tight mb-5">Our Blog</h1>
           <p class="text-zinc-400 text-lg max-w-xl mx-auto">Expert articles on cybersecurity, digital investigations, fraud prevention, and online safety.</p>
         </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
 
-        <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          <div class="glass rounded-3xl overflow-hidden"><div class="h-48 skeleton"></div><div class="p-6 space-y-3"><div class="h-4 skeleton w-1/3"></div><div class="h-5 skeleton w-4/5"></div><div class="h-4 skeleton w-full"></div><div class="h-4 skeleton w-2/3"></div></div></div>
-          <div class="glass rounded-3xl overflow-hidden"><div class="h-48 skeleton"></div><div class="p-6 space-y-3"><div class="h-4 skeleton w-1/3"></div><div class="h-5 skeleton w-4/5"></div><div class="h-4 skeleton w-full"></div><div class="h-4 skeleton w-2/3"></div></div></div>
-          <div class="glass rounded-3xl overflow-hidden"><div class="h-48 skeleton"></div><div class="p-6 space-y-3"><div class="h-4 skeleton w-1/3"></div><div class="h-5 skeleton w-4/5"></div><div class="h-4 skeleton w-full"></div><div class="h-4 skeleton w-2/3"></div></div></div>
+          <!-- Article 1 -->
+          <div class="blog-card glass rounded-3xl overflow-hidden" onclick="showArticle('art1')">
+            <div class="h-48 overflow-hidden bg-zinc-900">
+              <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80" alt="Crypto Scam Investigation" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.style.display='none'">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="bg-emerald-500/15 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full">Fraud &amp; Scam Investigation</span>
+                <span class="text-zinc-600 text-xs">1 Jun 2026</span>
+              </div>
+              <h3 class="font-bold text-base md:text-lg mb-2 leading-snug hover:text-emerald-400 transition">Cryptocurrency and Investment Scam Investigations: What to Do If You Have Been Defrauded</h3>
+              <p class="text-zinc-400 text-sm leading-relaxed line-clamp-3">The rise of cryptocurrency and online investment platforms has created exciting opportunities for investors worldwide. Unfortunately, it has also opened the door for scammers...</p>
+              <div class="mt-4 text-emerald-400 text-sm font-semibold flex items-center gap-1">Read article <i class="fa-solid fa-arrow-right text-xs"></i></div>
+            </div>
+          </div>
+
+          <!-- Placeholder 2 -->
+          <div class="blog-card glass rounded-3xl overflow-hidden opacity-50 cursor-default">
+            <div class="h-48 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
+              <i class="fa-solid fa-pen-to-square text-4xl text-zinc-600"></i>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3"><span class="bg-zinc-700/50 text-zinc-500 text-xs font-semibold px-3 py-1 rounded-full">Coming Soon</span></div>
+              <div class="h-4 bg-white/5 rounded-full mb-2 w-4/5"></div>
+              <div class="h-3 bg-white/5 rounded-full mb-2 w-full"></div>
+              <div class="h-3 bg-white/5 rounded-full w-2/3"></div>
+            </div>
+          </div>
+
+          <!-- Placeholder 3 -->
+          <div class="blog-card glass rounded-3xl overflow-hidden opacity-50 cursor-default">
+            <div class="h-48 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
+              <i class="fa-solid fa-pen-to-square text-4xl text-zinc-600"></i>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3"><span class="bg-zinc-700/50 text-zinc-500 text-xs font-semibold px-3 py-1 rounded-full">Coming Soon</span></div>
+              <div class="h-4 bg-white/5 rounded-full mb-2 w-4/5"></div>
+              <div class="h-3 bg-white/5 rounded-full mb-2 w-full"></div>
+              <div class="h-3 bg-white/5 rounded-full w-2/3"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <footer class="bg-zinc-950 pt-10 pb-8 border-t border-white/5"><div class="max-w-7xl mx-auto px-6 text-center text-zinc-600 text-sm"><p>Linchpin Service - Solving Complex Problems with Technology and Trust.</p></div></footer>
+  </div>
+
+  <!-- ARTICLE 1 PAGE -->
+  <div id="page-art1" class="page">
+    <div class="min-h-screen bg-gradient-to-b from-zinc-950 to-black pt-28 pb-20">
+      <div class="max-w-3xl mx-auto px-6">
+
+        <!-- Back -->
+        <button onclick="showPage('blog')" class="flex items-center gap-2 text-emerald-400 text-sm font-semibold mb-10 hover:gap-3 transition-all">
+          <i class="fa-solid fa-arrow-left"></i> Back to Blog
+        </button>
+
+        <!-- Header -->
+        <div class="mb-8">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="bg-emerald-500/15 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full">Fraud &amp; Scam Investigation</span>
+            <span class="text-zinc-600 text-xs">1 Jun 2026</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-6">Cryptocurrency and Investment Scam Investigations: What to Do If You Have Been Defrauded</h1>
+          <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&q=80" alt="Crypto Scam Investigation" class="w-full rounded-3xl object-cover max-h-80 mb-10" onerror="this.style.display='none'">
         </div>
 
-        <div id="blog-empty" class="hidden mt-8 glass rounded-3xl p-10 md:p-14 text-center max-w-3xl mx-auto">
-          <div class="text-emerald-400 text-4xl mb-5"><i class="fa-solid fa-pen-to-square"></i></div>
-          <h3 class="text-2xl font-bold mb-3">Articles Coming Soon</h3>
-          <p class="text-zinc-400 mb-8">Expert insights on cybersecurity, fraud prevention, and digital safety are on the way. Reach out to us on Telegram in the meantime.</p>
-          <a href="https://t.me/linchpin_service" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 px-8 py-4 rounded-2xl font-semibold inline-flex items-center gap-3 transition"><i class="fa-brands fa-telegram"></i> Talk to Us on Telegram</a>
+        <!-- Article body -->
+        <div class="prose">
+          <p>The rise of cryptocurrency and online investment platforms has created exciting opportunities for investors worldwide. Unfortunately, it has also opened the door for scammers who exploit unsuspecting individuals through fraudulent investment schemes, fake trading platforms, romance scams, and cryptocurrency theft.</p>
+          <p>If you suspect that you have fallen victim to a cryptocurrency or investment scam, acting quickly can significantly improve the chances of identifying the perpetrators and recovering valuable evidence.</p>
+
+          <h2>Common Types of Cryptocurrency and Investment Scams</h2>
+
+          <h3>1. Fake Investment Platforms</h3>
+          <p>Fraudsters create professional-looking websites and mobile applications that promise unrealistic returns on investment. Victims are encouraged to deposit funds, only to discover later that withdrawals are impossible.</p>
+
+          <h3>2. Cryptocurrency Recovery Scams</h3>
+          <p>After losing money, victims are often targeted again by individuals claiming they can recover stolen funds for an upfront fee.</p>
+
+          <h3>3. Romance and Pig Butchering Scams</h3>
+          <p>Scammers build trust through social media or dating platforms before convincing victims to invest in fraudulent cryptocurrency opportunities.</p>
+
+          <h3>4. Impersonation Scams</h3>
+          <p>Criminals pose as financial advisors, celebrities, government agencies, or legitimate investment firms to gain credibility and access to funds.</p>
+
+          <h3>5. Ponzi and Pyramid Schemes</h3>
+          <p>These operations use funds from new investors to pay earlier participants while falsely presenting profits as legitimate investment returns.</p>
+
+          <h2>Warning Signs of an Investment Scam</h2>
+          <ul>
+            <li>Guaranteed or unusually high returns</li>
+            <li>Pressure to invest immediately</li>
+            <li>Lack of verifiable company information</li>
+            <li>Unlicensed investment advisors</li>
+            <li>Difficulty withdrawing funds</li>
+            <li>Requests for payment exclusively through cryptocurrency</li>
+            <li>Communication through private messaging apps only</li>
+          </ul>
+
+          <h2>How Professional Investigations Can Help</h2>
+          <p>A cryptocurrency and investment scam investigation may involve:</p>
+          <ul>
+            <li>Tracing cryptocurrency wallet transactions</li>
+            <li>Identifying linked wallet addresses</li>
+            <li>Gathering digital evidence</li>
+            <li>Preserving communication records</li>
+            <li>Investigating suspicious websites and platforms</li>
+            <li>Documenting financial losses</li>
+            <li>Supporting legal and regulatory complaints</li>
+          </ul>
+          <p>Professional investigators can help victims compile evidence that may be useful for law enforcement agencies, legal proceedings, or regulatory reports.</p>
+
+          <h2>What To Do If You Suspect a Scam</h2>
+          <ol>
+            <li>Stop sending money immediately.</li>
+            <li>Preserve all emails, messages, receipts, and transaction records.</li>
+            <li>Record cryptocurrency wallet addresses involved.</li>
+            <li>Take screenshots of websites and account dashboards.</li>
+            <li>Report the incident to relevant authorities.</li>
+            <li>Seek professional investigative assistance as soon as possible.</li>
+          </ol>
+
+          <h2>Protecting Yourself From Future Fraud</h2>
+          <ul>
+            <li>Research investment opportunities thoroughly.</li>
+            <li>Verify company registrations and licenses.</li>
+            <li>Avoid investments promising guaranteed returns.</li>
+            <li>Use reputable cryptocurrency exchanges.</li>
+            <li>Never share private wallet keys or account credentials.</li>
+            <li>Consult independent financial professionals before investing.</li>
+          </ul>
+
+          <h2>Need Assistance?</h2>
+          <p>If you suspect you have been targeted by a cryptocurrency or investment scam, obtaining professional investigative support can help uncover critical information, preserve evidence, and assist with appropriate reporting and recovery efforts.</p>
+          <p>Contact our team for a confidential consultation to discuss your situation and explore available investigative options.</p>
         </div>
-        <div id="blog-error" class="hidden mt-4 text-center text-zinc-500 text-sm">Could not load articles right now. <a href="https://t.me/linchpin_service" class="text-emerald-400 hover:underline">Contact us on Telegram</a>.</div>
+
+        <!-- CTA -->
+        <div class="mt-10 glass rounded-3xl p-8 text-center">
+          <p class="text-zinc-300 font-semibold mb-4">Been targeted by a cryptocurrency scam? We can help.</p>
+          <a href="https://t.me/linchpin_service" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 px-8 py-4 rounded-2xl font-semibold inline-flex items-center gap-3 transition">
+            <i class="fa-brands fa-telegram"></i> Get Confidential Help
+          </a>
+        </div>
+
+        <!-- Comments section -->
+        <div class="mt-16">
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold flex items-center gap-3"><i class="fa-regular fa-comments text-emerald-400"></i>Comments <span id="comment-count" class="text-zinc-500 text-base font-normal ml-1">(0)</span></h2>
+            <button onclick="adminLogin()" class="text-zinc-600 hover:text-zinc-400 text-xs transition flex items-center gap-1"><i class="fa-solid fa-lock"></i> Admin</button>
+          </div>
+
+          <!-- Comment list -->
+          <div id="comment-list" class="space-y-5 mb-10"></div>
+
+          <!-- Admin note -->
+          <p class="text-zinc-600 text-xs mb-6 italic">All comments are reviewed before appearing publicly.</p>
+
+          <!-- Comment form -->
+          <div class="glass rounded-3xl p-6 md:p-8">
+            <h3 class="font-bold mb-5 text-lg">Leave a Comment</h3>
+            <div class="grid md:grid-cols-2 gap-4 mb-4">
+              <input type="text" id="c-name" placeholder="Your name *" class="cinput">
+              <input type="email" id="c-email" placeholder="Email (not published) *" class="cinput">
+            </div>
+            <textarea id="c-msg" rows="4" placeholder="Write your comment..." class="comment-box mb-4"></textarea>
+            <button onclick="submitComment()" class="bg-emerald-600 hover:bg-emerald-500 px-6 py-3 rounded-xl font-semibold text-sm transition flex items-center gap-2">
+              <i class="fa-solid fa-paper-plane"></i> Post Comment
+            </button>
+            <p id="c-feedback" class="text-sm mt-3 hidden"></p>
+          </div>
+        </div>
+
       </div>
     </div>
     <footer class="bg-zinc-950 pt-10 pb-8 border-t border-white/5"><div class="max-w-7xl mx-auto px-6 text-center text-zinc-600 text-sm"><p>Linchpin Service - Solving Complex Problems with Technology and Trust.</p></div></footer>
@@ -419,7 +595,6 @@
       document.getElementById('page-' + name).classList.add('active');
       document.querySelectorAll('.nav-link[data-page]').forEach(a => a.classList.toggle('active', a.dataset.page === name));
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      if (name === 'blog' && !blogLoaded) loadBlog();
       return false;
     }
     function toggleDropdown(card) {
@@ -452,57 +627,124 @@
     }
 
     /* -------------------------------------------------------
-       BLOG — powered by Hashnode RSS feed (free, always works)
-       Client writes posts on linchpinservice.hashnode.dev
-       Posts appear here automatically. No backend needed.
+       BLOG — self-contained comments system
+       Comments stored in localStorage per article.
+       Admin approves by clicking Approve inside the page.
+       ADMIN PASSWORD: linchpin2026 (change as needed)
     ------------------------------------------------------- */
-    let blogLoaded = false;
-    const HASHNODE_RSS = 'https://linchpinservice.hashnode.dev/rss.xml';
-    const RSS_PROXY   = 'https://api.rss2json.com/v1/api.json?rss_url=';
+    const ADMIN_PASS = 'linchpin2026';
+    let isAdmin = false;
 
-    async function loadBlog() {
-      blogLoaded = true;
-      const grid  = document.getElementById('blog-grid');
-      const empty = document.getElementById('blog-empty');
-      const error = document.getElementById('blog-error');
+    function showArticle(id) {
+      showPage(id);
+      renderComments(id);
+    }
 
-      try {
-        const res  = await fetch(RSS_PROXY + encodeURIComponent(HASHNODE_RSS));
-        const data = await res.json();
-        const items = data?.items;
+    function renderComments(articleId) {
+      const key = 'comments_' + articleId;
+      const all = JSON.parse(localStorage.getItem(key) || '[]');
+      const approved = all.filter(c => c.approved);
+      const pending  = isAdmin ? all.filter(c => !c.approved) : [];
+      const list = document.getElementById('comment-list');
+      const count = document.getElementById('comment-count');
+      if (!list) return;
 
-        if (!items || items.length === 0) {
-          grid.innerHTML = '';
-          empty.classList.remove('hidden');
-          return;
-        }
+      count.textContent = '(' + approved.length + ')';
 
-        grid.innerHTML = items.slice(0, 6).map(p => {
-          const date  = new Date(p.pubDate).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
-          const tag   = (p.categories && p.categories[0]) || 'Article';
-          const cover = p.thumbnail || p.enclosure?.link || '';
-          const brief = p.description ? p.description.replace(/<[^>]+>/g,'').slice(0,160) + '...' : '';
-          return `<a href="${p.link}" target="_blank" rel="noopener" class="blog-card glass rounded-3xl overflow-hidden block group">
-            <div class="h-48 bg-gradient-to-br from-emerald-900/40 to-zinc-900 overflow-hidden">
-              ${cover
-                ? `<img src="${cover}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center\\'><i class=\\'fa-solid fa-shield-halved text-5xl text-emerald-500/30\\'></i></div>'">`
-                : `<div class="w-full h-full flex items-center justify-center"><i class="fa-solid fa-shield-halved text-5xl text-emerald-500/30"></i></div>`}
-            </div>
-            <div class="p-6">
-              <div class="flex items-center gap-3 mb-3">
-                <span class="bg-emerald-500/15 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full">${tag}</span>
-                <span class="text-zinc-600 text-xs">${date}</span>
+      let html = '';
+      approved.forEach((c, i) => {
+        html += `<div class="glass rounded-2xl p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center font-bold text-sm">${c.name.charAt(0).toUpperCase()}</div>
+            <div><p class="font-semibold text-sm">${c.name}</p><p class="text-zinc-600 text-xs">${c.date}</p></div>
+          </div>
+          <p class="text-zinc-300 text-sm leading-relaxed">${c.msg}</p>
+        </div>`;
+      });
+
+      if (isAdmin && pending.length > 0) {
+        html += '<div class="mt-6 border-t border-white/10 pt-6"><p class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-4">Pending Approval (' + pending.length + ')</p>';
+        pending.forEach((c, i) => {
+          const realIdx = all.indexOf(c);
+          html += `<div class="border border-amber-400/30 rounded-2xl p-5 mb-3 bg-amber-400/5">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-zinc-700 flex items-center justify-center font-bold text-xs">${c.name.charAt(0).toUpperCase()}</div>
+                <span class="font-semibold text-sm">${c.name}</span>
+                <span class="text-zinc-600 text-xs">${c.date}</span>
               </div>
-              <h3 class="font-bold text-base md:text-lg mb-2 leading-snug group-hover:text-emerald-400 transition">${p.title}</h3>
-              <p class="text-zinc-400 text-sm leading-relaxed line-clamp-3">${brief}</p>
-              <div class="mt-4 text-emerald-400 text-sm font-semibold flex items-center gap-1">Read article <i class="fa-solid fa-arrow-right text-xs"></i></div>
+              <div class="flex gap-2">
+                <button onclick="approveComment('${articleId}',${realIdx})" class="bg-emerald-600 hover:bg-emerald-500 px-3 py-1 rounded-lg text-xs font-semibold transition">Approve</button>
+                <button onclick="deleteComment('${articleId}',${realIdx})" class="bg-red-600 hover:bg-red-500 px-3 py-1 rounded-lg text-xs font-semibold transition">Delete</button>
+              </div>
             </div>
-          </a>`;
-        }).join('');
+            <p class="text-zinc-400 text-sm">${c.msg}</p>
+          </div>`;
+        });
+        html += '</div>';
+      }
 
-      } catch(err) {
-        grid.innerHTML = '';
-        error.classList.remove('hidden');
+      if (approved.length === 0 && (!isAdmin || pending.length === 0)) {
+        html = '<p class="text-zinc-500 text-sm italic">No comments yet. Be the first to share your thoughts.</p>';
+      }
+
+      list.innerHTML = html;
+    }
+
+    function submitComment() {
+      const articleId = document.querySelector('.page.active').id.replace('page-','');
+      const name = document.getElementById('c-name').value.trim();
+      const email = document.getElementById('c-email').value.trim();
+      const msg  = document.getElementById('c-msg').value.trim();
+      const fb   = document.getElementById('c-feedback');
+
+      if (!name || !email || !msg) {
+        fb.textContent = 'Please fill in all fields.';
+        fb.className = 'text-sm mt-3 text-red-400';
+        fb.classList.remove('hidden');
+        return;
+      }
+
+      const key = 'comments_' + articleId;
+      const all = JSON.parse(localStorage.getItem(key) || '[]');
+      all.push({ name, email, msg, date: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}), approved: false });
+      localStorage.setItem(key, JSON.stringify(all));
+
+      document.getElementById('c-name').value = '';
+      document.getElementById('c-email').value = '';
+      document.getElementById('c-msg').value = '';
+
+      fb.textContent = 'Thank you! Your comment is awaiting moderation.';
+      fb.className = 'text-sm mt-3 text-emerald-400';
+      fb.classList.remove('hidden');
+      setTimeout(() => fb.classList.add('hidden'), 4000);
+      renderComments(articleId);
+    }
+
+    function approveComment(articleId, idx) {
+      const key = 'comments_' + articleId;
+      const all = JSON.parse(localStorage.getItem(key) || '[]');
+      if (all[idx]) { all[idx].approved = true; localStorage.setItem(key, JSON.stringify(all)); }
+      renderComments(articleId);
+    }
+
+    function deleteComment(articleId, idx) {
+      const key = 'comments_' + articleId;
+      const all = JSON.parse(localStorage.getItem(key) || '[]');
+      all.splice(idx, 1);
+      localStorage.setItem(key, JSON.stringify(all));
+      renderComments(articleId);
+    }
+
+    function adminLogin() {
+      const pw = prompt('Enter admin password:');
+      if (pw === ADMIN_PASS) {
+        isAdmin = true;
+        const articleId = document.querySelector('.page.active').id.replace('page-','');
+        renderComments(articleId);
+        alert('Admin mode ON. You can now approve or delete comments.');
+      } else {
+        alert('Incorrect password.');
       }
     }
   </script>

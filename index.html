@@ -1048,29 +1048,12 @@
     <footer class="bg-zinc-950 pt-10 pb-8 border-t border-white/5"><div class="max-w-7xl mx-auto px-6 text-center text-zinc-600 text-sm"><p>Linchpin Service - Solving Complex Problems with Technology and Trust.</p></div></footer>
   </div>
 
-  <!-- Tawk.to Live Chat Widget -->
-  <!--
-    SETUP (2 minutes):
-    1. Go to https://tawk.to and sign up free with linchpinservice@gmail.com
-    2. Create a property called "Linchpin Service"
-    3. Go to Administration > Chat Widget > copy your Property ID and Widget ID
-    4. Replace TAWK_PROPERTY_ID and TAWK_WIDGET_ID below with your actual IDs
-    5. Delete the custom button below — Tawk.to shows its own chat bubble automatically
-    Until you set up Tawk.to, the button below opens the contact page as fallback.
-  -->
-  <!--Start of Tawk.to Script-->
-  <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-      s1.async=true;
-      s1.src='https://embed.tawk.to/6a219acaa48b111c34b69e84/1jq9k9a18';
-      s1.charset='UTF-8';
-      s1.setAttribute('crossorigin','*');
-      s0.parentNode.insertBefore(s1,s0);
-    })();
-  </script>
-  <!--End of Tawk.to Script-->
+  <!-- Floating Contact Us button -->
+  <a href="#" onclick="showPage('contact'); return false;"
+     class="fixed bottom-6 right-6 bg-emerald-600 hover:bg-emerald-500 px-6 py-4 rounded-3xl flex items-center gap-3 shadow-2xl z-50 transition hover:scale-105">
+    <i class="fa-solid fa-envelope text-lg"></i>
+    <span class="font-semibold hidden sm:inline">Contact Us</span>
+  </a>
 
   <script>
     let menuOpen = false;
